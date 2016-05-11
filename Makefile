@@ -5,7 +5,7 @@
 ## Login   <villen_l@epitech.net>
 ## 
 ## Started on  Wed May 11 16:00:21 2016 Lucas Villeneuve
-## Last update Wed May 11 16:47:17 2016 Lucas Villeneuve
+## Last update Wed May 11 18:27:51 2016 Lucas Villeneuve
 ##
 
 NAME	=	42sh
@@ -14,6 +14,10 @@ SRC	=	src/main.c		\
 		src/get_next_line.c	\
 		src/my_str_to_wordtab.c	\
 		src/my_print.c		\
+		src/error.c		\
+		src/my_free.c		\
+		src/epurstr.c		\
+		src/my_env.c
 
 OBJ	=	$(SRC:.c=.o)
 

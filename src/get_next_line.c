@@ -5,54 +5,13 @@
 ** Login   <villen_l@epitech.net>
 ** 
 ** Started on  Mon Mar 28 15:07:18 2016 Lucas Villeneuve
-** Last update Mon Mar 28 15:07:23 2016 Lucas Villeneuve
+** Last update Wed May 11 17:20:57 2016 Lucas Villeneuve
 */
 
+#include <string.h>
 #include <unistd.h>
+#include <stdlib.h>
 #include "get_next_line.h"
-
-int	my_strlen(char *str)
-{
-  int	i;
-
-  i = 0;
-  while (str[i] != 0)
-    i++;
-  return (i);
-}
-
-void	my_memset(char *str, int size)
-{
-  char	*tmp;
-
-  tmp = str;
-  while (size > 0)
-    {
-      *tmp = 0;
-      tmp++;
-      size--;
-    }
-}
-
-char	*my_realloc(char *str, size_t size)
-{
-  char	*newstr;
-  int	i;
-
-  newstr = malloc(size + my_strlen(str));
-  if (newstr == NULL)
-    return (NULL);
-  my_memset(newstr, size + my_strlen(str));
-  i = 0;
-  while (str[i] != 0)
-    {
-      newstr[i] = str[i];
-      i++;
-    }
-  newstr[i] = 0;
-  free(str);
-  return (newstr);
-}
 
 char		read_char(const int fd)
 {
@@ -80,9 +39,8 @@ char		*get_next_line(const int fd)
   int		i;
   int		j;
 
-  if ((str = malloc(READ_SIZE + 1)) == NULL || fd == -1)
+  if ((str = calloc(READ_SIZE + 1, sizeof(char))) == NULL || fd == -1)
     return (NULL);
-  my_memset(str, READ_SIZE + 1);
   j = 2;
   i = 0;
   c = read_char(fd);
@@ -92,7 +50,7 @@ char		*get_next_line(const int fd)
       c = read_char(fd);
       if (i == (READ_SIZE * (j - 1)))
       	{
-      	  str = my_realloc(str, READ_SIZE * j);
+      	  str = realloc(str, READ_SIZE * j);
       	  j++;
       	}
     }

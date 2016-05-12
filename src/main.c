@@ -5,26 +5,33 @@
 ** Login   <villen_l@epitech.net>
 **
 ** Started on  Wed May 11 15:59:33 2016 Lucas Villeneuve
-** Last update Thu May 12 11:15:30 2016 escorn_t
+** Last update Thu May 12 15:58:44 2016 escorn_t
 */
 
+#include <stdio.h>
 #include <stdlib.h>
 #include "42sh.h"
 
 int		main_loop()
 {
-  t_tree	tree;
-  char		*line;
-  char		**tab;
+  t_tree	*tree;
+  int		i;
 
   while (42)
     {
       my_putstr("-->");
-      line = epurstr(get_next_line(0));
-      tab = my_str_to_wordtab(line, ';');
-      if (create_tree(&tree, tab) == -1)
+      if ((tree = malloc(sizeof(t_tree))) == NULL)
+	error_malloc();
+      tree->cmd = get_next_line(0);
+      if (create_tree(tree) == -1)
 	return (-1);
-      free_tab(tab);
+      printf("ENTRY = %s\n", tree->cmd);
+      i = 0;
+      while (tree->next[i] != NULL)
+	{
+	  printf("tab[%d] = %s\n", i, tree->next[i]->cmd);
+	  i++;
+	}
     }
 }
 

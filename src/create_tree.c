@@ -5,49 +5,79 @@
 ** Login   <escorn_t@epitech.net>
 **
 ** Started on  Wed May 11 18:45:52 2016 escorn_t
-** Last update Thu May 12 11:16:45 2016 escorn_t
+** Last update Thu May 12 15:02:40 2016 escorn_t
 */
 
 #include <string.h>
 #include <stdlib.h>
 #include "42sh.h"
 
-int		add_in_tree(t_tree *tree, char **tab, int i)
+char		*get_word(char *s, char c, int pos)
 {
-  t_tree	*new;
-  t_tree       	*tmp;
+  char		*res;
+  int		i;
+  int		j;
+  int		compt;
 
-  if ((new = malloc(sizeof(t_tree))) == NULL)
-    return (-1);
-  new->cmd = strdup(tab[i]);
-  new->next = NULL;
-  if (tree == NULL)
-    tree = new;
-  else
+  i = 0;
+  j = 0;
+  compt = 0;
+  if ((res = malloc(strlen(s) + 1)) == NULL)
+    error_malloc();
+  while (compt < pos)
     {
-      tmp = tree;
-      while (tmp->next)
-	tmp = tmp->next;
-      tmp->next = new;
+      while (s[i] && s[i] != c)
+	i++;
+      i++;
+      compt++;
     }
-  return (0);
+  while (s[i] && s[i] != c)
+    res[j++] = s[i++];
+  res[j] = 0;
+  return (res);
 }
 
-int		create_tree(t_tree *tree, char **tab)
+t_tree		*add_in_tree_tab(t_tree *tree, int i)
+{
+  t_tree	*new;
+
+  if ((new = malloc(sizeof(t_tree))) == NULL)
+    error_malloc();
+  new->cmd = get_word(tree->cmd, ';', i);
+  new->next = NULL;
+  return (new);
+}
+
+int		get_nb_word(char *s, char c)
+{
+  int		i;
+  int		compt;
+
+  compt = 1;
+  i = 0;
+  while (s && s[i])
+    {
+      if (s[i] == c)
+	compt++;
+      i++;
+    }
+  return (compt);
+}
+
+int		create_tree(t_tree *tree)
 {
   int		i;
 
   i = 0;
-  tree = NULL;
-  while (tab[i])
+  tree->next = malloc(sizeof(t_tree *) * (get_nb_word(tree->cmd, ';') + 1));
+  if (tree->next == NULL)
+    error_malloc();
+  while (i < get_nb_word(tree->cmd, ';'))
     {
-      if (add_in_tree(tree, tab, i) == -1)
+      if ((tree->next[i] = add_in_tree_tab(tree, i)) == NULL)
 	return (-1);
       i++;
     }
-  i = 0;
-  while (tab[i])
-    free(tab[i++]);
-  free(tab);
+  tree->next[i] = NULL;
   return (0);
 }

@@ -5,7 +5,7 @@
 ** Login   <escorn_t@epitech.net>
 **
 ** Started on  Wed May 11 13:26:46 2016 escorn_t
-** Last update Thu May 12 14:57:57 2016 escorn_t
+** Last update Thu May 12 18:02:47 2016 Lucas Villeneuve
 */
 
 #ifndef _42SH_H_
@@ -29,6 +29,7 @@ void	my_putstr(char *str);
 void	my_put_err(char *str);
 void	my_putchar_err(char c);
 void	free_tree(t_tree *tree);
+void	my_simple_exec(char **cmd, char **path, t_env *env);
 int	create_tree(t_tree *tree);
 int	error_malloc();
 char	*epurstr(char *str);

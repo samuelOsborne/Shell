@@ -5,14 +5,13 @@
 ** Login   <villen_l@epitech.net>
 **
 ** Started on  Wed May 11 15:59:33 2016 Lucas Villeneuve
-** Last update Thu May 12 15:58:44 2016 escorn_t
+** Last update Thu May 12 18:03:00 2016 Lucas Villeneuve
 */
 
-#include <stdio.h>
 #include <stdlib.h>
 #include "42sh.h"
 
-int		main_loop()
+int		main_loop(t_env *env)
 {
   t_tree	*tree;
   int		i;
@@ -20,18 +19,18 @@ int		main_loop()
   while (42)
     {
       my_putstr("-->");
-      if ((tree = malloc(sizeof(t_tree))) == NULL)
+      if ((tree = calloc(1, sizeof(t_tree))) == NULL)
 	error_malloc();
       tree->cmd = get_next_line(0);
-      if (create_tree(tree) == -1)
-	return (-1);
-      printf("ENTRY = %s\n", tree->cmd);
+      create_tree(tree);
       i = 0;
       while (tree->next[i] != NULL)
 	{
-	  printf("tab[%d] = %s\n", i, tree->next[i]->cmd);
+	  tree->next[i]->cmd = epurstr(tree->next[i]->cmd);
+	  my_simple_exec(my_str_to_wordtab(tree->next[i]->cmd, ' '), NULL, env);
 	  i++;
 	}
+      
     }
 }
 
@@ -43,6 +42,8 @@ void		ini_shell(char **ae)
   while (ae[env.size] != NULL)
     env.size++;
   env.tab = create_env(ae, env.size);
+  main_loop(&env);
+  return ;
 }
 
 int		main(int argc, char **argv, char **env)
@@ -51,7 +52,6 @@ int		main(int argc, char **argv, char **env)
   (void)argv;
   if (!env[0])
     my_put_err("Env is NULL\n");
-  if (main_loop() == -1)
-    return (-1);
+  ini_shell(env);
   return (0);
 }

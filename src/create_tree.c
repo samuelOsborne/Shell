@@ -5,7 +5,7 @@
 ** Login   <escorn_t@epitech.net>
 **
 ** Started on  Wed May 11 18:45:52 2016 escorn_t
-** Last update Thu May 12 15:02:40 2016 escorn_t
+** Last update Thu May 12 17:54:43 2016 Lucas Villeneuve
 */
 
 #include <string.h>
@@ -68,10 +68,12 @@ int		create_tree(t_tree *tree)
 {
   int		i;
 
-  i = 0;
-  tree->next = malloc(sizeof(t_tree *) * (get_nb_word(tree->cmd, ';') + 1));
+  if (tree == NULL)
+    return (1);
+  tree->next = calloc(get_nb_word(tree->cmd, ';') + 1, sizeof(t_tree *));
   if (tree->next == NULL)
     error_malloc();
+  i = 0;
   while (i < get_nb_word(tree->cmd, ';'))
     {
       if ((tree->next[i] = add_in_tree_tab(tree, i)) == NULL)

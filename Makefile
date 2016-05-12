@@ -1,11 +1,11 @@
 ##
 ## Makefile for 42sh in /media/villen_l/home/villen_l/rendu/Tek1Semestre2/Shell/PSU_2015_42sh
-## 
+##
 ## Made by Lucas Villeneuve
 ## Login   <villen_l@epitech.net>
-## 
+##
 ## Started on  Wed May 11 16:00:21 2016 Lucas Villeneuve
-## Last update Wed May 11 18:27:51 2016 Lucas Villeneuve
+## Last update Thu May 12 11:13:32 2016 escorn_t
 ##
 
 NAME	=	42sh
@@ -17,7 +17,8 @@ SRC	=	src/main.c		\
 		src/error.c		\
 		src/my_free.c		\
 		src/epurstr.c		\
-		src/my_env.c
+		src/my_env.c		\
+		src/create_tree.c
 
 OBJ	=	$(SRC:.c=.o)
 

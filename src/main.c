@@ -5,13 +5,13 @@
 ** Login   <villen_l@epitech.net>
 **
 ** Started on  Wed May 11 15:59:33 2016 Lucas Villeneuve
-** Last update Thu May 12 18:03:00 2016 Lucas Villeneuve
+** Last update Fri May 13 13:40:06 2016 Lucas Villeneuve
 */
 
 #include <stdlib.h>
 #include "42sh.h"
 
-int		main_loop(t_env *env)
+int		main_loop(t_all *all)
 {
   t_tree	*tree;
   int		i;
@@ -21,29 +21,28 @@ int		main_loop(t_env *env)
       my_putstr("-->");
       if ((tree = calloc(1, sizeof(t_tree))) == NULL)
 	error_malloc();
+      all->path = my_str_to_wordtab(my_getenv(all->env.tab, "PATH="), ':');
       tree->cmd = get_next_line(0);
       create_tree(tree);
       i = 0;
       while (tree->next[i] != NULL)
 	{
 	  tree->next[i]->cmd = epurstr(tree->next[i]->cmd);
-	  my_simple_exec(my_str_to_wordtab(tree->next[i]->cmd, ' '), NULL, env);
+	  my_simple_exec(my_str_to_wordtab(tree->next[i]->cmd, ' '), all->path, &all->env);
 	  i++;
-	}
-      
+	}      
     }
 }
 
 void		ini_shell(char **ae)
 {
-  t_env		env;
+  t_all		all;
 
-  env.size = 0;
-  while (ae[env.size] != NULL)
-    env.size++;
-  env.tab = create_env(ae, env.size);
-  main_loop(&env);
-  return ;
+  all.env.size = 0;
+  while (ae[all.env.size] != NULL)
+    all.env.size++;
+  all.env.tab = create_env(ae, all.env.size);
+  main_loop(&all);
 }
 
 int		main(int argc, char **argv, char **env)

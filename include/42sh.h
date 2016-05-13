@@ -5,7 +5,7 @@
 ** Login   <escorn_t@epitech.net>
 **
 ** Started on  Wed May 11 13:26:46 2016 escorn_t
-** Last update Thu May 12 18:02:47 2016 Lucas Villeneuve
+** Last update Fri May 13 13:37:45 2016 Lucas Villeneuve
 */
 
 #ifndef _42SH_H_
@@ -23,6 +23,12 @@ typedef	struct	s_env
   char		**tab;
 }		t_env;
 
+typedef struct	s_all
+{
+  t_env		env;
+  char		**path;
+}		t_all;
+
 void	my_putchar(char c);
 void	free_tab(char **tab);
 void	my_putstr(char *str);
@@ -34,6 +40,7 @@ int	create_tree(t_tree *tree);
 int	error_malloc();
 char	*epurstr(char *str);
 char	*get_next_line(int fd);
+char	*my_getenv(char **env, char *str);
 char	**create_env(char **ae, int i);
 char	**my_str_to_wordtab(char *str, char opt);
 

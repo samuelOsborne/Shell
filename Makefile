@@ -5,7 +5,7 @@
 ## Login   <villen_l@epitech.net>
 ##
 ## Started on  Wed May 11 16:00:21 2016 Lucas Villeneuve
-## Last update Fri May 13 13:36:05 2016 Lucas Villeneuve
+## Last update Fri May 13 17:34:31 2016 Lucas Villeneuve
 ##
 
 NAME	=	42sh
@@ -20,7 +20,9 @@ SRC	=	src/main.c		\
 		src/my_env.c		\
 		src/create_tree.c	\
 		src/my_exec.c		\
-		src/my_getenv.c
+		src/my_getenv.c		\
+		src/find_type_cmd.c	\
+		src/builtins.c
 
 OBJ	=	$(SRC:.c=.o)
 

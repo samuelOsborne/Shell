@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 **
 ** Started on  Wed May 11 15:59:33 2016 Lucas Villeneuve
-** Last update Fri May 13 13:40:06 2016 Lucas Villeneuve
+** Last update Fri May 13 17:25:09 2016 Lucas Villeneuve
 */
 
 #include <stdlib.h>
@@ -14,6 +14,7 @@
 int		main_loop(t_all *all)
 {
   t_tree	*tree;
+  char		**tab;
   int		i;
 
   while (42)
@@ -27,10 +28,12 @@ int		main_loop(t_all *all)
       i = 0;
       while (tree->next[i] != NULL)
 	{
-	  tree->next[i]->cmd = epurstr(tree->next[i]->cmd);
-	  my_simple_exec(my_str_to_wordtab(tree->next[i]->cmd, ' '), all->path, &all->env);
+	  tab = my_str_to_wordtab(epurstr(tree->next[i]->cmd), ' ');
+	  find_type_cmd(tab, all);
+	  free_tab(tab);
 	  i++;
-	}      
+	}
+      free_tree(tree);
     }
 }
 

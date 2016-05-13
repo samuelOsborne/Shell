@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 ** 
 ** Started on  Thu May 12 16:51:55 2016 Lucas Villeneuve
-** Last update Thu May 12 18:02:49 2016 Lucas Villeneuve
+** Last update Fri May 13 17:49:46 2016 Lucas Villeneuve
 */
 
 #include <sys/types.h>
@@ -46,6 +46,18 @@ char	*find_bin_without_path(char **cmd)
   return (NULL);
 }
 
+char	*check_relative_path(char **cmd)
+{
+  if (access(cmd[0], F_OK | X_OK) == 0)
+    return (cmd[0]);
+  else
+    {
+      my_put_err("Command not found\n");
+      free(cmd[0]);
+      return (NULL);
+    }
+}
+
 char	*find_bin(char **path, char **cmd)
 {
   char	*tmp;
@@ -53,11 +65,7 @@ char	*find_bin(char **path, char **cmd)
   int	i;
 
   if (cmd[0][0] == '.' || cmd[0][0] == '/')
-    {
-      if (access(cmd[0], F_OK | X_OK) == 0)
-	return (cmd[0]);
-      return (NULL);
-    }
+    return (check_relative_path(cmd));
   ret = -1;
   i = 0;
   while (ret == -1 && path[i])
@@ -73,17 +81,6 @@ char	*find_bin(char **path, char **cmd)
   my_put_err("Command not found\n");
   free(cmd[0]);
   return (NULL);
-}
-
-void	my_execve_pipe(char **cmd, char **path, t_env *env)
-{
-  if (path != NULL)
-    cmd[0] = find_bin(path, cmd);
-  else
-    cmd[0] = find_bin_without_path(cmd);
-  if (cmd[0] != NULL)
-    execve(cmd[0], cmd, env->tab);
-  exit(1);
 }
 
 void	my_simple_exec(char **cmd, char **path, t_env *env)

@@ -5,7 +5,7 @@
 ** Login   <escorn_t@epitech.net>
 **
 ** Started on  Wed May 11 18:45:52 2016 escorn_t
-** Last update Thu May 12 17:54:43 2016 Lucas Villeneuve
+** Last update Fri May 13 17:14:27 2016 Lucas Villeneuve
 */
 
 #include <string.h>
@@ -22,7 +22,7 @@ char		*get_word(char *s, char c, int pos)
   i = 0;
   j = 0;
   compt = 0;
-  if ((res = malloc(strlen(s) + 1)) == NULL)
+  if ((res = calloc(strlen(s) + 1, sizeof(char))) == NULL)
     error_malloc();
   while (compt < pos)
     {
@@ -41,7 +41,7 @@ t_tree		*add_in_tree_tab(t_tree *tree, int i)
 {
   t_tree	*new;
 
-  if ((new = malloc(sizeof(t_tree))) == NULL)
+  if ((new = calloc(1, sizeof(t_tree))) == NULL)
     error_malloc();
   new->cmd = get_word(tree->cmd, ';', i);
   new->next = NULL;

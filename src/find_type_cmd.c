@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 ** 
 ** Started on  Fri May 13 17:15:58 2016 Lucas Villeneuve
-** Last update Fri May 13 17:41:50 2016 Lucas Villeneuve
+** Last update Mon May 16 13:44:04 2016 Lucas Villeneuve
 */
 
 #include <string.h>
@@ -29,9 +29,13 @@ int	check_builtin(char **cmd, t_all *all)
   while (i < 4)
     {
       if (cmd[0][0] == string[i])
-	return (tab[i](cmd, all));
+	{
+	  free(string);
+	  return (tab[i](cmd, all));
+	}
       i++;
     }
+  free(string);
   return (0);
 }
 

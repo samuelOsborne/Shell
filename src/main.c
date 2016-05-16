@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 **
 ** Started on  Wed May 11 15:59:33 2016 Lucas Villeneuve
-** Last update Fri May 13 17:25:09 2016 Lucas Villeneuve
+** Last update Mon May 16 13:45:43 2016 Lucas Villeneuve
 */
 
 #include <stdlib.h>
@@ -13,27 +13,27 @@
 
 int		main_loop(t_all *all)
 {
-  t_tree	*tree;
   char		**tab;
   int		i;
 
   while (42)
     {
       my_putstr("-->");
-      if ((tree = calloc(1, sizeof(t_tree))) == NULL)
+      if ((all->tree = calloc(1, sizeof(t_tree))) == NULL)
 	error_malloc();
       all->path = my_str_to_wordtab(my_getenv(all->env.tab, "PATH="), ':');
-      tree->cmd = get_next_line(0);
-      create_tree(tree);
+      all->tree->cmd = get_next_line(0);
+      create_tree(all->tree);
       i = 0;
-      while (tree->next[i] != NULL)
+      while (all->tree->next[i] != NULL)
 	{
-	  tab = my_str_to_wordtab(epurstr(tree->next[i]->cmd), ' ');
+	  tab = my_str_to_wordtab(epurstr(all->tree->next[i]->cmd), ' ');
 	  find_type_cmd(tab, all);
 	  free_tab(tab);
 	  i++;
 	}
-      free_tree(tree);
+      free_path(all->path);
+      free_tree(all->tree);
     }
 }
 

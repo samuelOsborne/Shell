@@ -5,7 +5,7 @@
 ** Login   <escorn_t@epitech.net>
 **
 ** Started on  Wed May 11 13:26:46 2016 escorn_t
-** Last update Fri May 13 17:39:37 2016 Lucas Villeneuve
+** Last update Mon May 16 13:57:13 2016 Lucas Villeneuve
 */
 
 #ifndef _42SH_H_
@@ -26,18 +26,24 @@ typedef	struct	s_env
 typedef struct	s_all
 {
   t_env		env;
+  t_tree	*tree;
   char		**path;
 }		t_all;
 
 void	error_malloc();
 void	my_putchar(char c);
+void	free_env(t_env env);
 void	free_tab(char **tab);
 void	my_putstr(char *str);
 void	my_put_err(char *str);
 void	my_putchar_err(char c);
+void	free_path(char **path);
 void	free_tree(t_tree *tree);
 void	find_type_cmd(char **tab, t_all *all);
+void	my_simple_exit(char **cmd, t_all *all);
+void	my_advanced_exit(char **cmd, t_all *all, int ret);
 void	my_simple_exec(char **cmd, char **path, t_env *env);
+int	my_getnbr(char *str);
 int	create_tree(t_tree *tree);
 int	my_cd(char **cmd, t_all *all);
 int	my_setenv(char **cmd, t_all *all);

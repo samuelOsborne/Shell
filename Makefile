@@ -5,7 +5,7 @@
 ## Login   <villen_l@epitech.net>
 ##
 ## Started on  Wed May 11 16:00:21 2016 Lucas Villeneuve
-## Last update Mon May 16 13:57:26 2016 Lucas Villeneuve
+## Last update Mon May 16 15:41:18 2016 Lucas Villeneuve
 ##
 
 NAME	=	42sh
@@ -24,7 +24,8 @@ SRC	=	src/main.c		\
 		src/find_type_cmd.c	\
 		src/builtins.c		\
 		src/my_exit.c		\
-		src/my_getnbr.c
+		src/my_getnbr.c		\
+		src/manage_tab_env.c
 
 OBJ	=	$(SRC:.c=.o)
 

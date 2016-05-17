@@ -5,7 +5,7 @@
 ** Login   <escorn_t@epitech.net>
 **
 ** Started on  Wed May 11 13:26:46 2016 escorn_t
-** Last update Mon May 16 13:57:13 2016 Lucas Villeneuve
+** Last update Mon May 16 15:21:00 2016 Lucas Villeneuve
 */
 
 #ifndef _42SH_H_
@@ -35,24 +35,30 @@ void	my_putchar(char c);
 void	free_env(t_env env);
 void	free_tab(char **tab);
 void	my_putstr(char *str);
+void	print_env(t_env *env);
 void	my_put_err(char *str);
 void	my_putchar_err(char c);
 void	free_path(char **path);
 void	free_tree(t_tree *tree);
+void	my_setenv(char **cmd, t_env *env);
+void	my_unsetenv(char **cmd, t_env *env);
 void	find_type_cmd(char **tab, t_all *all);
 void	my_simple_exit(char **cmd, t_all *all);
 void	my_advanced_exit(char **cmd, t_all *all, int ret);
 void	my_simple_exec(char **cmd, char **path, t_env *env);
 int	my_getnbr(char *str);
 int	create_tree(t_tree *tree);
-int	my_cd(char **cmd, t_all *all);
-int	my_setenv(char **cmd, t_all *all);
-int	my_unsetenv(char **cmd, t_all *all);
+int	my_getenv_line(char **env, char *str);
+int	my_cd_builtin(char **cmd, t_all *all);
 int	my_exit_and_env(char **cmd, t_all *all);
+int	my_setenv_builtin(char **cmd, t_all *all);
+int	my_unsetenv_builtin(char **cmd, t_all *all);
 char	*epurstr(char *str);
 char	*get_next_line(int fd);
 char	*my_getenv(char **env, char *str);
 char	**create_env(char **ae, int i);
 char	**my_str_to_wordtab(char *str, char opt);
+char	**recreate_tab_unset(char **ae, int i, int del);
+char	**recreate_tab_set(char **cmd, char **ae, int i);
 
 #endif /* !_42SH_H_ */

@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 ** 
 ** Started on  Wed May 11 17:30:02 2016 Lucas Villeneuve
-** Last update Mon May 16 13:43:03 2016 Lucas Villeneuve
+** Last update Mon May 16 15:18:56 2016 Lucas Villeneuve
 */
 
 #include <stdlib.h>
@@ -29,9 +29,7 @@ void	free_tree(t_tree *tree)
 
   i = 0;
   while (tree->next[i] != NULL)
-    {
-      free(tree->next[i++]);
-    }
+    free(tree->next[i++]);
   free(tree->next);
   free(tree->cmd);
   free(tree);
@@ -41,6 +39,8 @@ void	free_env(t_env env)
 {
   int	i;
 
+  if (!env.tab)
+    return ;
   i = 0;
   while (env.tab[i] != NULL)
     free(env.tab[i++]);
@@ -51,8 +51,10 @@ void	free_path(char **path)
 {
   int	i;
 
+  if (!path)
+    return ;
   i = 0;
-  while (path[i])
+  while (path[i] != NULL)
     free(path[i++]);
   free(path);
 }

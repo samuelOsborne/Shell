@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 ** 
 ** Started on  Fri May 13 17:15:58 2016 Lucas Villeneuve
-** Last update Mon May 16 13:44:04 2016 Lucas Villeneuve
+** Last update Mon May 16 14:35:59 2016 Lucas Villeneuve
 */
 
 #include <string.h>
@@ -22,10 +22,10 @@ int	check_builtin(char **cmd, t_all *all)
     error_malloc();
   strcpy(string, "cesu");
   i = 0;
-  tab[0] = &my_cd;
+  tab[0] = &my_cd_builtin;
   tab[1] = &my_exit_and_env;
-  tab[2] = &my_setenv;
-  tab[3] = &my_unsetenv;
+  tab[2] = &my_setenv_builtin;
+  tab[3] = &my_unsetenv_builtin;
   while (i < 4)
     {
       if (cmd[0][0] == string[i])
@@ -38,10 +38,6 @@ int	check_builtin(char **cmd, t_all *all)
   free(string);
   return (0);
 }
-
-/* int	check_simple_exec(char **tab, t_all *all) */
-/* { */
-/* } */
 
 void	find_type_cmd(char **tab, t_all *all)
 {

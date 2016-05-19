@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 ** 
 ** Started on  Fri May 13 17:15:58 2016 Lucas Villeneuve
-** Last update Mon May 16 14:35:59 2016 Lucas Villeneuve
+** Last update Thu May 19 10:22:20 2016 Lucas Villeneuve
 */
 
 #include <string.h>
@@ -23,7 +23,7 @@ int	check_builtin(char **cmd, t_all *all)
   strcpy(string, "cesu");
   i = 0;
   tab[0] = &my_cd_builtin;
-  tab[1] = &my_exit_and_env;
+  tab[1] = &my_exit_env_echo;
   tab[2] = &my_setenv_builtin;
   tab[3] = &my_unsetenv_builtin;
   while (i < 4)
@@ -41,6 +41,8 @@ int	check_builtin(char **cmd, t_all *all)
 
 void	find_type_cmd(char **tab, t_all *all)
 {
+  if (tab == NULL)
+    return ;
   if (check_builtin(tab, all) == 1)
     return ;
   my_simple_exec(tab, all->path, &all->env);

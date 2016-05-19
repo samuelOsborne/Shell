@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 ** 
 ** Started on  Wed May 11 17:35:19 2016 Lucas Villeneuve
-** Last update Wed May 11 18:15:18 2016 Lucas Villeneuve
+** Last update Thu May 19 10:30:06 2016 Lucas Villeneuve
 */
 
 #include <string.h>
@@ -41,7 +41,7 @@ char	*epurstr(char *str)
   int	i;
 
   if (str == NULL)
-    exit(0);
+    return (NULL);
   if ((tmp = calloc(strlen(str) + 1, sizeof(char))) == NULL)
     error_malloc();
   i = 0;

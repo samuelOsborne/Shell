@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 ** 
 ** Started on  Fri May 13 17:32:16 2016 Lucas Villeneuve
-** Last update Mon May 16 15:20:27 2016 Lucas Villeneuve
+** Last update Thu May 19 10:20:55 2016 Lucas Villeneuve
 */
 
 #include <stdlib.h>
@@ -20,7 +20,7 @@ int	my_cd_builtin(char **cmd, t_all *all)
   return (1);
 }
 
-int	my_exit_and_env(char **cmd, t_all *all)
+int	my_exit_env_echo(char **cmd, t_all *all)
 {
   if (strcmp(cmd[0], "exit") == 0)
     {
@@ -32,6 +32,11 @@ int	my_exit_and_env(char **cmd, t_all *all)
   else if (strcmp(cmd[0], "env") == 0)
     {
       print_env(&all->env);
+      return (1);
+    }
+  else if (strcmp(cmd[0], "echo") == 0)
+    {
+      (cmd[1] != NULL) ? my_echo(cmd, all) : my_putchar('\n');
       return (1);
     }
   return (0);

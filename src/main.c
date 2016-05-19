@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 **
 ** Started on  Wed May 11 15:59:33 2016 Lucas Villeneuve
-** Last update Mon May 16 13:45:43 2016 Lucas Villeneuve
+** Last update Thu May 19 10:30:32 2016 Lucas Villeneuve
 */
 
 #include <stdlib.h>
@@ -29,7 +29,8 @@ int		main_loop(t_all *all)
 	{
 	  tab = my_str_to_wordtab(epurstr(all->tree->next[i]->cmd), ' ');
 	  find_type_cmd(tab, all);
-	  free_tab(tab);
+	  if (tab != NULL)
+	    free_tab(tab);
 	  i++;
 	}
       free_path(all->path);

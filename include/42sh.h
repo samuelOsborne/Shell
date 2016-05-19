@@ -5,7 +5,7 @@
 ** Login   <escorn_t@epitech.net>
 **
 ** Started on  Wed May 11 13:26:46 2016 escorn_t
-** Last update Mon May 16 15:21:00 2016 Lucas Villeneuve
+** Last update Wed May 18 19:21:16 2016 Lucas Villeneuve
 */
 
 #ifndef _42SH_H_
@@ -40,6 +40,7 @@ void	my_put_err(char *str);
 void	my_putchar_err(char c);
 void	free_path(char **path);
 void	free_tree(t_tree *tree);
+void	my_echo(char **cmd, t_all *all);
 void	my_setenv(char **cmd, t_env *env);
 void	my_unsetenv(char **cmd, t_env *env);
 void	find_type_cmd(char **tab, t_all *all);
@@ -50,9 +51,10 @@ int	my_getnbr(char *str);
 int	create_tree(t_tree *tree);
 int	my_getenv_line(char **env, char *str);
 int	my_cd_builtin(char **cmd, t_all *all);
-int	my_exit_and_env(char **cmd, t_all *all);
+int	my_exit_env_echo(char **cmd, t_all *all);
 int	my_setenv_builtin(char **cmd, t_all *all);
 int	my_unsetenv_builtin(char **cmd, t_all *all);
+int	check_dollar(char **str, int i, int j, t_all *all);
 char	*epurstr(char *str);
 char	*get_next_line(int fd);
 char	*my_getenv(char **env, char *str);

@@ -5,7 +5,7 @@
 ** Login   <escorn_t@epitech.net>
 **
 ** Started on  Wed May 11 18:45:52 2016 escorn_t
-** Last update Fri May 13 17:14:27 2016 Lucas Villeneuve
+** Last update Thu May 19 10:27:19 2016 Lucas Villeneuve
 */
 
 #include <string.h>
@@ -43,7 +43,10 @@ t_tree		*add_in_tree_tab(t_tree *tree, int i)
 
   if ((new = calloc(1, sizeof(t_tree))) == NULL)
     error_malloc();
-  new->cmd = get_word(tree->cmd, ';', i);
+  if (tree->cmd == NULL)
+    new->cmd = NULL;
+  else
+    new->cmd = get_word(tree->cmd, ';', i);
   new->next = NULL;
   return (new);
 }

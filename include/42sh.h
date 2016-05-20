@@ -5,7 +5,7 @@
 ** Login   <escorn_t@epitech.net>
 **
 ** Started on  Wed May 11 13:26:46 2016 escorn_t
-** Last update Thu May 19 11:15:13 2016 Lucas Villeneuve
+** Last update Fri May 20 13:34:29 2016 Lucas Villeneuve
 */
 
 #ifndef _42SH_H_
@@ -23,15 +23,23 @@ typedef	struct	s_env
   char		**tab;
 }		t_env;
 
+typedef struct	s_cd
+{
+  char		*old;
+  char		*pwd;
+}		t_cd;
+
 typedef struct	s_all
 {
   t_env		env;
+  t_cd		cd;
   t_tree	*tree;
   char		**path;
   int		tty;
 }		t_all;
 
 void	error_malloc();
+void	free_cd(t_cd cd);
 void	my_putchar(char c);
 void	free_env(t_env env);
 void	free_tab(char **tab);
@@ -41,6 +49,7 @@ void	my_put_err(char *str);
 void	my_putchar_err(char c);
 void	free_path(char **path);
 void	free_tree(t_tree *tree);
+void	my_cd(t_all *all, char **cmd);
 void	my_echo(char **cmd, t_all *all);
 void	my_setenv(char **cmd, t_env *env);
 void	my_unsetenv(char **cmd, t_env *env);

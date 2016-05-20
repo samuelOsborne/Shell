@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 **
 ** Started on  Wed May 11 15:59:33 2016 Lucas Villeneuve
-** Last update Thu May 19 11:16:28 2016 Lucas Villeneuve
+** Last update Fri May 20 13:30:26 2016 Lucas Villeneuve
 */
 
 #include <stdlib.h>
@@ -50,6 +50,8 @@ void		ini_shell(char **ae)
     all.env.size++;
   all.env.tab = create_env(ae, all.env.size);
   all.tty = isatty(0);
+  all.cd.old = my_getenv(all.env.tab, "OLDPWD=");
+  all.cd.pwd = my_getenv(all.env.tab, "PWD=");
   main_loop(&all);
 }
 

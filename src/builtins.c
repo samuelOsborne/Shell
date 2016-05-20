@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 ** 
 ** Started on  Fri May 13 17:32:16 2016 Lucas Villeneuve
-** Last update Thu May 19 10:20:55 2016 Lucas Villeneuve
+** Last update Fri May 20 13:28:06 2016 Lucas Villeneuve
 */
 
 #include <stdlib.h>
@@ -17,6 +17,7 @@ int	my_cd_builtin(char **cmd, t_all *all)
   (void)all;
   if (strcmp(cmd[0], "cd") != 0)
     return (0);
+  my_cd(all, cmd);
   return (1);
 }
 

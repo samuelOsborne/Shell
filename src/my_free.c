@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 ** 
 ** Started on  Wed May 11 17:30:02 2016 Lucas Villeneuve
-** Last update Mon May 16 15:18:56 2016 Lucas Villeneuve
+** Last update Fri May 20 13:34:02 2016 Lucas Villeneuve
 */
 
 #include <stdlib.h>
@@ -57,4 +57,12 @@ void	free_path(char **path)
   while (path[i] != NULL)
     free(path[i++]);
   free(path);
+}
+
+void	free_cd(t_cd cd)
+{
+  if (cd.old != NULL)
+    free(cd.old);
+  if (cd.pwd != NULL)
+    free(cd.pwd);
 }

@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 ** 
 ** Started on  Wed May 18 19:15:10 2016 Lucas Villeneuve
-** Last update Wed May 18 19:25:04 2016 Lucas Villeneuve
+** Last update Fri May 20 15:07:53 2016 Lucas Villeneuve
 */
 
 #include <string.h>
@@ -21,7 +21,8 @@ char	*create_tmp(char **str, int i, int *j)
     error_malloc();
   k = 0;
   *j += 1;
-  while (str[i][*j] && str[i][*j] != ' ' && str[i][*j] != '\"' && str[i][*j] != '\'')
+  while (str[i][*j] && str[i][*j] != ' ' &&
+	 str[i][*j] != '\"' && str[i][*j] != '\'')
     {
       if (str[i][*j] != ' ' &&
 	  (str[i][*j] < 48 || (str[i][*j] > 57 && str[i][*j] < 65)
@@ -63,7 +64,7 @@ int	check_dollar(char **str, int i, int j, t_all *all)
 		}
 	      else
 		free(var);
-	    }	    
+	    }
 	}
     }
   return (0);

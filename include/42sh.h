@@ -5,7 +5,7 @@
 ** Login   <escorn_t@epitech.net>
 **
 ** Started on  Wed May 11 13:26:46 2016 escorn_t
-** Last update Wed May 18 19:21:16 2016 Lucas Villeneuve
+** Last update Thu May 19 11:15:13 2016 Lucas Villeneuve
 */
 
 #ifndef _42SH_H_
@@ -28,6 +28,7 @@ typedef struct	s_all
   t_env		env;
   t_tree	*tree;
   char		**path;
+  int		tty;
 }		t_all;
 
 void	error_malloc();

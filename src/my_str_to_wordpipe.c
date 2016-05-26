@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 ** 
 ** Started on  Mon May 23 10:24:30 2016 Lucas Villeneuve
-** Last update Thu May 26 12:45:29 2016 Lucas Villeneuve
+** Last update Thu May 26 13:47:31 2016 Lucas Villeneuve
 */
 #include <stdlib.h>
 #include <string.h>
@@ -70,11 +70,14 @@ int	parse_error_pipe(char *str)
     {
       if (str[i] == '|' || str[i] == '<' || str[i] == '>')
 	{
-	  if (str[i] == '|' && (str[i + 1] == '>' || str[i + 1] == '<'))
+	  if (str[i] == '|' && (str[i + 1] == '>' || str[i + 1] == '<'
+				|| str[i + 1] == 0))
 	    return (error_pipe(str[i + 1]));
-	  else if (str[i] == '>' && (str[i + 1] == '<' || str[i + 1] == '|'))
+	  else if (str[i] == '>' && (str[i + 1] == '<' || str[i + 1] == '|'
+				     || str[i + 1] == 0))
 	    return (error_pipe(str[i + 1]));
-	  else if (str[i] == '<' && (str[i + 1] == '>' || str[i + 1] == '|'))
+	  else if (str[i] == '<' && (str[i + 1] == '>' || str[i + 1] == '|'
+				     || str[i + 1] == 0))
 	    return (error_pipe(str[i + 1]));
 	}
       i++;

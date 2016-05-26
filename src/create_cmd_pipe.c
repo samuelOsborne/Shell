@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 ** 
 ** Started on  Wed May 25 14:43:29 2016 Lucas Villeneuve
-** Last update Thu May 26 12:34:07 2016 Lucas Villeneuve
+** Last update Thu May 26 15:02:12 2016 Lucas Villeneuve
 */
 
 #include <string.h>
@@ -104,6 +104,11 @@ t_pipe		*create_cmd_pipe(char **tab)
 
   nb = count_nb_case_pipe(tab);
   args = count_nb_args(tab);
+  if (args < 3)
+    {
+      my_put_err("Error number parsing\n");
+      return (NULL);
+    }
   if ((pipe = calloc(nb + 1, sizeof(t_pipe))) == NULL)
     return (NULL);
   i = 0;

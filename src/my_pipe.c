@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 ** 
 ** Started on  Tue May 24 10:34:19 2016 Lucas Villeneuve
-** Last update Thu May 26 12:58:14 2016 Lucas Villeneuve
+** Last update Thu May 26 15:05:36 2016 Lucas Villeneuve
 */
 
 #include <sys/types.h>
@@ -49,16 +49,14 @@ void	end_loop_pipe(t_fd st_end, t_pipe *cmd, t_all *all, int j)
   exit(0);
 }
 
-void		my_loop_pipe(char **tab, t_all *all)
+void		my_loop_pipe(char **tab, t_all *all, t_pipe *cmd)
 {
   int		nb_pipe;
   int		fd[2];
   int		i;
   int		j;
   t_fd		st_end;
-  t_pipe	*cmd;
 
-  cmd = create_cmd_pipe(tab);
   nb_pipe = count_nb_pipe(tab);
   st_end.start = 0;
   j = 0;
@@ -76,16 +74,20 @@ void		my_loop_pipe(char **tab, t_all *all)
   end_loop_pipe(st_end, cmd, all, j);
 }
 
-void	my_pipe(char **tab, t_all *all)
+void		my_pipe(char **tab, t_all *all)
 {
-  int	status;
-  pid_t	pid;
+  int		status;
+  pid_t		pid;
+  t_pipe	*cmd;
 
   if ((pid = fork()) == -1)
     return ;
   else if (pid == 0)
     {
-      my_loop_pipe(tab, all);
+      if ((cmd = create_cmd_pipe(tab)) == NULL)
+	exit(1);
+      my_loop_pipe(tab, all, cmd);
+      free(cmd);
       exit(0);
     }
   else

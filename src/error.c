@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 ** 
 ** Started on  Wed May 11 17:00:47 2016 Lucas Villeneuve
-** Last update Fri May 13 17:40:01 2016 Lucas Villeneuve
+** Last update Tue May 24 11:52:06 2016 Lucas Villeneuve
 */
 
 #include <stdlib.h>
@@ -15,4 +15,12 @@ void	error_malloc()
 {
   my_put_err("Error malloc\n");
   exit(1);
+}
+
+int	error_pipe(char c)
+{
+  my_put_err("Error parsing near ");
+  my_putchar_err(c);
+  my_putchar_err('\n');
+  return (2);
 }

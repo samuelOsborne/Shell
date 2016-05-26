@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 ** 
 ** Started on  Wed May 11 16:45:47 2016 Lucas Villeneuve
-** Last update Wed May 11 18:10:00 2016 Lucas Villeneuve
+** Last update Mon May 23 10:26:24 2016 Lucas Villeneuve
 */
 
 #include <stdlib.h>
@@ -70,7 +70,7 @@ char	**my_str_to_wordtab(char *str, char opt)
     error_malloc();
   i = 0;
   while (i < nb_args)
-    if ((tab[i++] = calloc(len + 1, sizeof(char)) ) == NULL)
+    if ((tab[i++] = calloc(len + 1, sizeof(char))) == NULL)
       error_malloc();
   tab = put_in_wordtab(tab, str, opt);
   tab[nb_args] = NULL;

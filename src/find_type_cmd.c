@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 ** 
 ** Started on  Fri May 13 17:15:58 2016 Lucas Villeneuve
-** Last update Thu May 19 11:09:30 2016 Lucas Villeneuve
+** Last update Thu May 26 12:37:41 2016 Lucas Villeneuve
 */
 
 #include <string.h>
@@ -39,11 +39,34 @@ int	check_builtin(char **cmd, t_all *all)
   return (0);
 }
 
+int	parse_for_pipe(char **tab)
+{
+  int	i;
+  int	j;
+
+  i = 0;
+  while (tab[i])
+    {
+      j = 0;
+      while (tab[i][j])
+	{
+	  if (tab[i][j] == '|' || tab[i][j] == '<' || tab[i][j] == '>')
+	    return (1);
+	  j++;
+	}
+      i++;
+    }
+  return (0);
+}
+
 void	find_type_cmd(char **tab, t_all *all)
 {
   if (tab == NULL)
     return ;
   if (check_builtin(tab, all) == 1)
     return ;
-  my_simple_exec(tab, all->path, &all->env);
+  if (parse_for_pipe(tab) == 1)
+    my_pipe(tab, all);
+  else
+    my_simple_exec(tab, all->path, &all->env);
 }

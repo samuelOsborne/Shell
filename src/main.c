@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 **
 ** Started on  Wed May 11 15:59:33 2016 Lucas Villeneuve
-** Last update Fri May 20 13:30:26 2016 Lucas Villeneuve
+** Last update Mon May 23 10:38:09 2016 Lucas Villeneuve
 */
 
 #include <stdlib.h>
@@ -30,7 +30,7 @@ void		main_loop(t_all *all)
       i = 0;
       while (all->tree->next[i] != NULL)
 	{
-	  tab = my_str_to_wordtab(epurstr(all->tree->next[i]->cmd), ' ');
+	  tab = my_str_to_wordpipe(epurstr(all->tree->next[i]->cmd));
 	  find_type_cmd(tab, all);
 	  if (tab != NULL)
 	    free_tab(tab);

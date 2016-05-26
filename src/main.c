@@ -5,9 +5,10 @@
 ** Login   <villen_l@epitech.net>
 **
 ** Started on  Wed May 11 15:59:33 2016 Lucas Villeneuve
-** Last update Thu May 26 15:11:10 2016 Lucas Villeneuve
+** Last update Thu May 26 18:18:55 2016 Arnaud Costa
 */
 
+#include <signal.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include "42sh.h"
@@ -17,6 +18,8 @@ void		main_loop(t_all *all)
   char		**tab;
   int		i;
 
+  if (signal(SIGINT, sig_finder) == SIG_ERR)
+    return ;
   while (42)
     {
       if (all->tty == 1)

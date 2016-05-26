@@ -5,7 +5,7 @@
 ** Login   <escorn_t@epitech.net>
 **
 ** Started on  Wed May 11 13:26:46 2016 escorn_t
-** Last update Thu May 26 12:48:00 2016 Lucas Villeneuve
+** Last update Thu May 26 18:17:09 2016 Arnaud Costa
 */
 
 #ifndef _42SH_H_
@@ -74,6 +74,7 @@ void	my_exec_pipe(char **cmd, char **path, t_env *env);
 void	my_advanced_exit(char **cmd, t_all *all, int ret);
 void	my_simple_exec(char **cmd, char **path, t_env *env);
 void	manage_start_redir(int start, int end, t_pipe *cmd, t_all *all);
+void	sig_finder(int sig);
 int	error_pipe(char c);
 int	my_getnbr(char *str);
 int	check_pipe(char *str);

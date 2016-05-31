@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 ** 
 ** Started on  Fri May 20 12:51:22 2016 Lucas Villeneuve
-** Last update Fri May 20 13:37:59 2016 Lucas Villeneuve
+** Last update Tue May 31 11:09:05 2016 Lucas Villeneuve
 */
 
 #include <string.h>
@@ -49,6 +49,11 @@ void	swap_cd(t_cd *cd)
 
 void	my_cd_dash(t_cd *cd)
 {
+  if (cd->old == NULL || cd->pwd == NULL)
+    {
+      my_put_err("Error directory\n");
+      return ;
+    }
   if (chdir(cd->old) == -1)
     my_put_err("Wrong directory\n");
   else
@@ -61,6 +66,11 @@ void	my_cd_dash(t_cd *cd)
 
 void	my_simple_cd(t_cd *cd, char **cmd)
 {
+  if (cd->old == NULL || cd->pwd == NULL)
+    {
+      my_put_err("Error directory\n");
+      return ;
+    }
   if (chdir(cmd[1]) == -1)
     my_put_err("Wrong directory\n");
   else
@@ -81,6 +91,11 @@ void	my_cd(t_all *all, char **cmd)
 	my_put_err("Error home directory\n");
       else
 	{
+	  if (all->cd.pwd == NULL)
+	    {
+	      my_put_err("Can't update PWD\n");
+	      return ;
+	    }
 	  update_cd(&all->cd, strlen(tmp) + 1);
 	  strcpy(all->cd.pwd, tmp);
 	  free(tmp);

@@ -5,7 +5,7 @@
 ** Login   <escorn_t@epitech.net>
 **
 ** Started on  Wed May 11 13:26:46 2016 escorn_t
-** Last update Thu May 26 18:17:09 2016 Arnaud Costa
+** Last update Tue May 31 18:23:11 2016 Lucas Villeneuve
 */
 
 #ifndef _42SH_H_
@@ -39,6 +39,7 @@ typedef struct	s_fd
 {
   int		start;
   int		end;
+  int		mode;
 }		t_fd;
 
 typedef struct	s_all
@@ -68,12 +69,12 @@ void	my_setenv(char **cmd, t_env *env);
 void	my_unsetenv(char **cmd, t_env *env);
 void	find_type_cmd(char **tab, t_all *all);
 void	my_simple_exit(char **cmd, t_all *all);
-void	manage_end_pipe(int start, t_pipe *cmd, int j);
-void	manage_start_pipe(int start, t_pipe *cmd, int j);
+void	manage_end_pipe(int end, t_pipe *cmd, int j);
+void	my_loop_pipe(char **tab, t_all *all, t_pipe *cmd);
 void	my_exec_pipe(char **cmd, char **path, t_env *env);
 void	my_advanced_exit(char **cmd, t_all *all, int ret);
 void	my_simple_exec(char **cmd, char **path, t_env *env);
-void	manage_start_redir(int start, int end, t_pipe *cmd, t_all *all);
+void	manage_start_pipe(t_fd *st_end, t_pipe *cmd, int j, t_all *all);
 void	sig_finder(int sig);
 int	error_pipe(char c);
 int	my_getnbr(char *str);

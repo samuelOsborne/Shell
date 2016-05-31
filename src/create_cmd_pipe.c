@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 ** 
 ** Started on  Wed May 25 14:43:29 2016 Lucas Villeneuve
-** Last update Thu May 26 15:02:12 2016 Lucas Villeneuve
+** Last update Tue May 31 18:23:22 2016 Lucas Villeneuve
 */
 
 #include <string.h>
@@ -57,8 +57,8 @@ void	fill_cmd_pipe_redir(char **tab, t_pipe *pipe, int args)
 	  strcmp(tab[k], ">>") == 0 || strcmp(tab[k], "<") == 0 ||
 	  strcmp(tab[k], "<<") == 0)
 	{
-	  if (k != 0)
-	    pipe[i++].tab[j] = NULL;
+	  if (k != 2)
+	    ++i;
 	  pipe[i++].tab[0] = tab[k++];
 	  j = 0;
 	}

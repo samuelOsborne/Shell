@@ -5,13 +5,17 @@
 ** Login   <costa_d@epitech.net>
 **
 ** Started on  Thu May 26 18:12:03 2016 Arnaud Costa
-** Last update Thu May 26 17:03:17 2016 Lucas Villeneuve
+** Last update Wed Jun  1 13:51:53 2016 Lucas Villeneuve
 */
 
+#include <signal.h>
 #include "42sh.h"
 
-void	sig_finder(__attribute__((unused))int sig)
+void	sig_finder(int sig)
 {
-  my_putstr("\b\b  \n");
-  my_putstr("-->");
+  if (sig == SIGINT)
+    {
+      my_putstr("\b\b  \n");
+      my_putstr("-->");
+    }
 }

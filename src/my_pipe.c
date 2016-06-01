@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 ** 
 ** Started on  Tue May 24 10:34:19 2016 Lucas Villeneuve
-** Last update Tue May 31 10:54:13 2016 Lucas Villeneuve
+** Last update Wed Jun  1 14:01:56 2016 Lucas Villeneuve
 */
 
 #include <sys/types.h>
@@ -92,6 +92,8 @@ void		my_pipe(char **tab, t_all *all)
     {
       wait(&status);
       if (status == 11 || status == 139 || status == SIGSEGV)
-	my_put_err("Segmentation fault\n");
+	my_put_err("Segmentation fault (core dumped)\n");
+      else if (status == SIGFPE || status == 136 || status == 8)
+	my_put_err("Floating exception (core dumped)\n");
     }
 }

@@ -5,9 +5,10 @@
 ** Login   <villen_l@epitech.net>
 ** 
 ** Started on  Fri May 20 12:51:22 2016 Lucas Villeneuve
-** Last update Wed Jun  1 10:45:20 2016 Lucas Villeneuve
+** Last update Wed Jun  1 13:35:22 2016 Lucas Villeneuve
 */
 
+#include <errno.h>
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -55,7 +56,10 @@ void	my_cd_dash(t_cd *cd)
       return ;
     }
   if (chdir(cd->old) == -1)
-    my_put_err("Wrong directory\n");
+    {
+      my_put_err(cd->old);
+      my_put_err(": No such file or directory.\n");
+    }
   else
     {
       my_putstr(cd->old);
@@ -67,7 +71,18 @@ void	my_cd_dash(t_cd *cd)
 void	my_simple_cd(t_cd *cd, char **cmd)
 {
   if (chdir(cmd[1]) == -1)
-    my_put_err("Wrong directory\n");
+    {
+      if (errno == ENOENT)
+	{
+	  my_put_err(cmd[1]);
+	  my_put_err(": No such file or directory.\n");
+	}
+      else if (errno == EACCES)
+	{
+	  my_put_err(cmd[1]);
+	  my_put_err(": Permission denied.\n");
+	}
+    }
   else
     {
       if (cd->old == NULL || cd->pwd == NULL)
@@ -85,7 +100,7 @@ void	my_cd(t_all *all, char **cmd)
     {
       tmp = my_getenv(all->env.tab, "HOME=");
       if (chdir(tmp) == -1)
-	my_put_err("Error home directory\n");
+	my_put_err("No $home variable set.\n");
       else
 	{
 	  if (all->cd.pwd == NULL)

@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 ** 
 ** Started on  Mon May 30 15:37:06 2016 Lucas Villeneuve
-** Last update Wed Jun  1 10:23:33 2016 Lucas Villeneuve
+** Last update Wed Jun  1 14:01:55 2016 Lucas Villeneuve
 */
 
 #include <string.h>
@@ -45,7 +45,9 @@ void	fork_exec_pipe(t_fd *st_end, t_pipe *cmd, int j, t_all *all)
     {
       wait(&status);
       if (status == 11 || status == 139 || status == SIGSEGV)
-	my_put_err("Segmentation fault\n");
+	my_put_err("Segmentation fault (core dumped)\n");
+      else if (status == SIGFPE || status == 136 || status == 8)
+	my_put_err("Floating exception (core dumped)\n");
     }
 }
 

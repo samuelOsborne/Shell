@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 ** 
 ** Started on  Wed Jun  1 10:49:12 2016 Lucas Villeneuve
-** Last update Wed Jun  1 12:58:03 2016 Lucas Villeneuve
+** Last update Wed Jun  1 13:39:30 2016 Lucas Villeneuve
 */
 
 #include <sys/types.h>
@@ -20,7 +20,7 @@ char 		*got_right(char *cmd)
 
   if (stat(cmd, &buffer) != 0)
     return (0);
-  if (buffer.st_mode & S_IWOTH)
+  if (buffer.st_mode & S_IXOTH)
     return (cmd);
   my_put_err(cmd);
   my_put_err(": Permission denied.\n");

@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 ** 
 ** Started on  Thu May 12 16:51:55 2016 Lucas Villeneuve
-** Last update Wed Jun  1 11:51:55 2016 Lucas Villeneuve
+** Last update Wed Jun  1 14:01:40 2016 Lucas Villeneuve
 */
 
 #include <sys/types.h>
@@ -13,7 +13,6 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdbool.h>
 #include "42sh.h"
 
 char 	*create_path(char *path, char *cmd)
@@ -117,7 +116,9 @@ void	my_simple_exec(char **cmd, char **path, t_env *env)
 	{
 	  wait(&status);
 	  if (status == 11 || status == 139 || status == SIGSEGV)
-	    my_put_err("Segmentation fault\n");
+	    my_put_err("Segmentation fault (core dumped)\n");
+	  else if (status == SIGFPE || status == 136 || status == 8)
+	    my_put_err("Floating exception (core dumped)\n");
 	}
     }
 }

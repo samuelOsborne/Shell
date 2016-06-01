@@ -5,7 +5,7 @@
 ** Login   <escorn_t@epitech.net>
 **
 ** Started on  Wed May 11 13:26:46 2016 escorn_t
-** Last update Wed Jun  1 10:55:02 2016 Lucas Villeneuve
+** Last update Wed Jun  1 12:58:02 2016 Lucas Villeneuve
 */
 
 #ifndef _42SH_H_
@@ -76,6 +76,7 @@ void	my_simple_exec(char **cmd, char **path, t_env *env);
 void	my_exec_pipe(char **cmd, char **path, t_env *env, t_all *all);
 void	manage_start_pipe(t_fd *st_end, t_pipe *cmd, int j, t_all *all);
 void	sig_finder(int sig);
+int	is_dir(char *cmd);
 int	error_pipe(char c);
 int	my_getnbr(char *str);
 int	check_pipe(char *str);
@@ -90,6 +91,7 @@ int	my_setenv_builtin(char **cmd, t_all *all);
 int	my_unsetenv_builtin(char **cmd, t_all *all);
 int	check_dollar(char **str, int i, int j, t_all *all);
 char	*epurstr(char *str);
+char	*got_right(char *cmd);
 char	*get_next_line(int fd);
 char	*command_not_found(char *cmd);
 char	*my_getenv(char **env, char *str);

@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 ** 
 ** Started on  Thu May 12 16:51:55 2016 Lucas Villeneuve
-** Last update Wed Jun  1 10:54:24 2016 Lucas Villeneuve
+** Last update Wed Jun  1 11:51:55 2016 Lucas Villeneuve
 */
 
 #include <sys/types.h>
@@ -45,15 +45,31 @@ char	*find_bin_without_path(char **cmd)
       free(cmd[0]);
       return (tmp);
     }
+  free(tmp);
+  tmp = create_path("/usr/bin/", cmd[0]);
+  if (access(tmp, F_OK | X_OK) == 0)
+    {
+      free(cmd[0]);
+      return (tmp);
+    }
+  free(tmp);
   return (command_not_found(cmd[0]));
 }
 
 char	*check_relative_path(char **cmd)
 {
   if (access(cmd[0], F_OK | X_OK) == 0)
-    return (cmd[0]);
-  else
-    return (command_not_found(cmd[0]));
+    {
+      if (got_right(cmd[0]) != NULL)
+	{
+	  if (is_dir(cmd[0]) == 0)
+	    return (cmd[0]);
+	  else
+	    return (command_not_found(cmd[0]));
+	}
+      return (NULL);
+    }
+  return (command_not_found(cmd[0]));
 }
 
 char	*find_bin(char **path, char **cmd)

@@ -5,7 +5,7 @@
 ** Login   <escorn_t@epitech.net>
 **
 ** Started on  Wed May 11 18:45:52 2016 escorn_t
-** Last update Thu May 19 10:27:19 2016 Lucas Villeneuve
+** Last update Wed Jun  1 15:15:54 2016 escorn_t
 */
 
 #include <string.h>
@@ -84,5 +84,8 @@ int		create_tree(t_tree *tree)
       i++;
     }
   tree->next[i] = NULL;
+  i = 0;
+  while (tree->next[i])
+    create_exec_tree(tree->next[i++]);
   return (0);
 }

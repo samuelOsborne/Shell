@@ -1,11 +1,11 @@
 /*
 ** find_type_cmd.c for 42sh in /media/villen_l/home/villen_l/rendu/Tek1Semestre2/Shell/PSU_2015_42sh
-** 
+**
 ** Made by Lucas Villeneuve
 ** Login   <villen_l@epitech.net>
-** 
+**
 ** Started on  Fri May 13 17:15:58 2016 Lucas Villeneuve
-** Last update Wed Jun  1 10:25:57 2016 Lucas Villeneuve
+** Last update Wed Jun  1 15:35:24 2016 escorn_t
 */
 
 #include <string.h>
@@ -73,6 +73,6 @@ void	find_type_cmd(char **tab, t_all *all)
     {
       if (check_builtin(tab, all) == 1)
 	return ;
-      my_simple_exec(tab, all->path, &all->env);
+      my_simple_exec(all, tab, all->path, &all->env);
     }
 }

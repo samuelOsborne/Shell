@@ -1,11 +1,11 @@
 /*
 ** my_pipe.c for 42sh in /media/home/villen_l/rendu/Tek1Semestre2/Shell/PSU_2015_42sh
-** 
+**
 ** Made by Lucas Villeneuve
 ** Login   <villen_l@epitech.net>
-** 
+**
 ** Started on  Tue May 24 10:34:19 2016 Lucas Villeneuve
-** Last update Wed Jun  1 14:01:56 2016 Lucas Villeneuve
+** Last update Wed Jun  1 15:46:58 2016 escorn_t
 */
 
 #include <sys/types.h>
@@ -74,7 +74,6 @@
 
 void		my_pipe(char **tab, t_all *all)
 {
-  int		status;
   pid_t		pid;
   t_pipe	*cmd;
 
@@ -90,10 +89,10 @@ void		my_pipe(char **tab, t_all *all)
     }
   else
     {
-      wait(&status);
-      if (status == 11 || status == 139 || status == SIGSEGV)
+      wait(&all->status);
+      if (all->status == 11 || all->status == 139 || all->status == SIGSEGV)
 	my_put_err("Segmentation fault (core dumped)\n");
-      else if (status == SIGFPE || status == 136 || status == 8)
+      else if (all->status == SIGFPE || all->status == 136 || all->status == 8)
 	my_put_err("Floating exception (core dumped)\n");
     }
 }

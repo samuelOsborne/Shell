@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 **
 ** Started on  Wed May 11 15:59:33 2016 Lucas Villeneuve
-** Last update Thu May 26 18:18:55 2016 Arnaud Costa
+** Last update Wed Jun  1 15:22:59 2016 escorn_t
 */
 
 #include <signal.h>
@@ -13,30 +13,36 @@
 #include <unistd.h>
 #include "42sh.h"
 
+void		init_all(t_all *all)
+{
+  if (all->tty == 1)
+    my_putstr("-->");
+  if ((all->tree = calloc(1, sizeof(t_tree))) == NULL)
+    error_malloc();
+  all->path = my_str_to_wordtab(my_getenv(all->env.tab, "PATH="), ':');
+  if ((all->tree->cmd = get_next_line(0)) == NULL)
+    return ;
+}
+
 void		main_loop(t_all *all)
 {
-  char		**tab;
   int		i;
+  int		j;
 
-  if (signal(SIGINT, sig_finder) == SIG_ERR)
-    return ;
   while (42)
     {
-      if (all->tty == 1)
-	my_putstr("-->");
-      if ((all->tree = calloc(1, sizeof(t_tree))) == NULL)
-	error_malloc();
-      all->path = my_str_to_wordtab(my_getenv(all->env.tab, "PATH="), ':');
-      if ((all->tree->cmd = get_next_line(0)) == NULL)
-	return ;
+      init_all(all);
       create_tree(all->tree);
       i = 0;
       while (all->tree->next[i] != NULL)
 	{
-	  tab = my_str_to_wordpipe(epurstr(all->tree->next[i]->cmd));
-	  find_type_cmd(tab, all);
-	  if (tab != NULL)
-	    free_tab(tab);
+	  j = 0;
+	  while (all->tree->next[i]->next[j] != NULL)
+	    {
+	      if (launch_condition(all, all->tree->next[i]->spec, j) == 0)
+                launch_exec(all->tree->next[i]->next[j], all);
+	      j++;
+	    }
 	  i++;
 	}
       free_path(all->path);
@@ -55,6 +61,8 @@ void		ini_shell(char **ae)
   all.tty = isatty(0);
   all.cd.old = my_getenv(all.env.tab, "OLDPWD=");
   all.cd.pwd = my_getenv(all.env.tab, "PWD=");
+  if (signal(SIGINT, sig_finder) == SIG_ERR)
+    return ;
   main_loop(&all);
 }
 

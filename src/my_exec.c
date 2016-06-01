@@ -1,11 +1,11 @@
 /*
 ** my_exec.c for 42sh in /media/villen_l/home/villen_l/rendu/Tek1Semestre2/Shell/PSU_2015_42sh
-** 
+**
 ** Made by Lucas Villeneuve
 ** Login   <villen_l@epitech.net>
-** 
+**
 ** Started on  Thu May 12 16:51:55 2016 Lucas Villeneuve
-** Last update Wed Jun  1 14:01:40 2016 Lucas Villeneuve
+** Last update Wed Jun  1 15:44:19 2016 escorn_t
 */
 
 #include <sys/types.h>
@@ -94,10 +94,9 @@ char	*find_bin(char **path, char **cmd)
   return (command_not_found(cmd[0]));
 }
 
-void	my_simple_exec(char **cmd, char **path, t_env *env)
+void	my_simple_exec(t_all *all, char **cmd, char **path, t_env *env)
 {
-  int	status;
-  int	pid;
+   int	pid;
 
   if (path != NULL)
     cmd[0] = find_bin(path, cmd);
@@ -114,10 +113,10 @@ void	my_simple_exec(char **cmd, char **path, t_env *env)
 	}
       else
 	{
-	  wait(&status);
-	  if (status == 11 || status == 139 || status == SIGSEGV)
+	  wait(&all->status);
+	  if (all->status == 11 || all->status == 139 || all->status == SIGSEGV)
 	    my_put_err("Segmentation fault (core dumped)\n");
-	  else if (status == SIGFPE || status == 136 || status == 8)
+	  else if (all->status == SIGFPE || all->status == 136 || all->status == 8)
 	    my_put_err("Floating exception (core dumped)\n");
 	}
     }

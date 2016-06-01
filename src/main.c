@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 **
 ** Started on  Wed May 11 15:59:33 2016 Lucas Villeneuve
-** Last update Wed Jun  1 15:22:59 2016 escorn_t
+** Last update Wed Jun  1 14:52:27 2016 Lucas Villeneuve
 */
 
 #include <signal.h>
@@ -20,8 +20,6 @@ void		init_all(t_all *all)
   if ((all->tree = calloc(1, sizeof(t_tree))) == NULL)
     error_malloc();
   all->path = my_str_to_wordtab(my_getenv(all->env.tab, "PATH="), ':');
-  if ((all->tree->cmd = get_next_line(0)) == NULL)
-    return ;
 }
 
 void		main_loop(t_all *all)
@@ -32,6 +30,8 @@ void		main_loop(t_all *all)
   while (42)
     {
       init_all(all);
+      if ((all->tree->cmd = get_next_line(0)) == NULL)
+	return ;
       create_tree(all->tree);
       i = 0;
       while (all->tree->next[i] != NULL)

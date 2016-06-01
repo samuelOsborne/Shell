@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 ** 
 ** Started on  Fri May 13 17:15:58 2016 Lucas Villeneuve
-** Last update Tue May 31 10:58:48 2016 Lucas Villeneuve
+** Last update Wed Jun  1 10:25:57 2016 Lucas Villeneuve
 */
 
 #include <string.h>
@@ -67,10 +67,12 @@ void	find_type_cmd(char **tab, t_all *all)
   /* i = 0; */
   /* while (tab[i]) */
   /*   printf("%s\n", tab[i++]); */
-  if (check_builtin(tab, all) == 1)
-    return ;
   if (parse_for_pipe(tab) == 1)
     my_pipe(tab, all);
   else
-    my_simple_exec(tab, all->path, &all->env);
+    {
+      if (check_builtin(tab, all) == 1)
+	return ;
+      my_simple_exec(tab, all->path, &all->env);
+    }
 }

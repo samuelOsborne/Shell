@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 ** 
 ** Started on  Mon May 30 16:39:33 2016 Lucas Villeneuve
-** Last update Tue May 31 18:20:45 2016 Lucas Villeneuve
+** Last update Wed Jun  1 10:24:32 2016 Lucas Villeneuve
 */
 
 #include <stdlib.h>
@@ -37,7 +37,7 @@ void	manage_start_right(t_fd *st_end, t_pipe *cmd, t_all *all)
 			O_WRONLY | O_CREAT | O_APPEND, 0664)) == -1)
 	  exit(1);
       dup_and_close(st_end->end, 1);
-      my_exec_pipe(cmd[2].tab, all->path, &all->env);
+      my_exec_pipe(cmd[2].tab, all->path, &all->env, all);
     }
 }
 

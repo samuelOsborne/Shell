@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 ** 
 ** Started on  Mon May 30 15:37:06 2016 Lucas Villeneuve
-** Last update Tue May 31 18:23:23 2016 Lucas Villeneuve
+** Last update Wed Jun  1 10:23:33 2016 Lucas Villeneuve
 */
 
 #include <string.h>
@@ -20,7 +20,7 @@ void	manage_mode_pipe(t_pipe *cmd, t_fd *st_end, int j, t_all *all)
   if (cmd[j + 3].tab != NULL)
     manage_end_pipe(st_end->end, cmd, j + 2);
   if (strcmp(cmd[j + 2].tab[0], "|") != 0)
-    my_exec_pipe(cmd[j + 2].tab, all->path, &all->env);
+    my_exec_pipe(cmd[j + 2].tab, all->path, &all->env, all);
 }
 
 void	fork_exec_pipe(t_fd *st_end, t_pipe *cmd, int j, t_all *all)
@@ -36,7 +36,7 @@ void	fork_exec_pipe(t_fd *st_end, t_pipe *cmd, int j, t_all *all)
       if (st_end->mode == 0)
       	{
       	  manage_end_pipe(st_end->end, cmd, j);
-      	  my_exec_pipe(cmd[j].tab, all->path, &all->env);
+      	  my_exec_pipe(cmd[j].tab, all->path, &all->env, all);
       	}
       else
 	manage_mode_pipe(cmd, st_end, j, all);
@@ -54,7 +54,7 @@ void	end_loop_pipe(t_fd st_end, t_pipe *cmd, t_all *all, int j)
   if (st_end.start != 0)
     dup2(st_end.start, 0);
   if (strcmp(cmd[j - 1].tab[0], "|") == 0)
-    my_exec_pipe(cmd[j].tab, all->path, &all->env);
+    my_exec_pipe(cmd[j].tab, all->path, &all->env, all);
   exit(0);
 }
 

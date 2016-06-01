@@ -5,7 +5,7 @@
 ** Login   <escorn_t@epitech.net>
 **
 ** Started on  Wed May 11 13:26:46 2016 escorn_t
-** Last update Tue May 31 18:23:11 2016 Lucas Villeneuve
+** Last update Wed Jun  1 10:55:02 2016 Lucas Villeneuve
 */
 
 #ifndef _42SH_H_
@@ -71,9 +71,9 @@ void	find_type_cmd(char **tab, t_all *all);
 void	my_simple_exit(char **cmd, t_all *all);
 void	manage_end_pipe(int end, t_pipe *cmd, int j);
 void	my_loop_pipe(char **tab, t_all *all, t_pipe *cmd);
-void	my_exec_pipe(char **cmd, char **path, t_env *env);
 void	my_advanced_exit(char **cmd, t_all *all, int ret);
 void	my_simple_exec(char **cmd, char **path, t_env *env);
+void	my_exec_pipe(char **cmd, char **path, t_env *env, t_all *all);
 void	manage_start_pipe(t_fd *st_end, t_pipe *cmd, int j, t_all *all);
 void	sig_finder(int sig);
 int	error_pipe(char c);
@@ -82,6 +82,7 @@ int	check_pipe(char *str);
 int	count_nb_pipe(char **tab);
 int	create_tree(t_tree *tree);
 int	count_args_wordpipe(char *str);
+int	check_builtin(char **cmd, t_all *all);
 int	my_getenv_line(char **env, char *str);
 int	my_cd_builtin(char **cmd, t_all *all);
 int	my_exit_env_echo(char **cmd, t_all *all);
@@ -90,6 +91,7 @@ int	my_unsetenv_builtin(char **cmd, t_all *all);
 int	check_dollar(char **str, int i, int j, t_all *all);
 char	*epurstr(char *str);
 char	*get_next_line(int fd);
+char	*command_not_found(char *cmd);
 char	*my_getenv(char **env, char *str);
 char	*find_bin(char **path, char **cmd);
 char	*find_bin_without_path(char **cmd);

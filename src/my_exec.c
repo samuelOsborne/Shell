@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 ** 
 ** Started on  Thu May 12 16:51:55 2016 Lucas Villeneuve
-** Last update Wed May 25 17:13:06 2016 Lucas Villeneuve
+** Last update Wed Jun  1 10:54:24 2016 Lucas Villeneuve
 */
 
 #include <sys/types.h>
@@ -30,20 +30,22 @@ char 	*create_path(char *path, char *cmd)
 
 char	*find_bin_without_path(char **cmd)
 {
+  char	*tmp;
+
   if (cmd[0][0] == '.' || cmd[0][0] == '/')
     {
       if (access(cmd[0], F_OK | X_OK) == 0)
 	return (cmd[0]);
       else
-	{
-	  my_put_err("Command not found\n");
-	  free(cmd[0]);
-	  return (NULL);
-	}
+	return (command_not_found(cmd[0]));
     }
-  my_put_err("Command not found\n");
-  free(cmd[0]);
-  return (NULL);
+  tmp = create_path("/bin/", cmd[0]);
+  if (access(tmp, F_OK | X_OK) == 0)
+    {
+      free(cmd[0]);
+      return (tmp);
+    }
+  return (command_not_found(cmd[0]));
 }
 
 char	*check_relative_path(char **cmd)
@@ -51,11 +53,7 @@ char	*check_relative_path(char **cmd)
   if (access(cmd[0], F_OK | X_OK) == 0)
     return (cmd[0]);
   else
-    {
-      my_put_err("Command not found\n");
-      free(cmd[0]);
-      return (NULL);
-    }
+    return (command_not_found(cmd[0]));
 }
 
 char	*find_bin(char **path, char **cmd)
@@ -78,9 +76,7 @@ char	*find_bin(char **path, char **cmd)
 	}
       free(tmp);
     }
-  my_put_err("Command not found\n");
-  free(cmd[0]);
-  return (NULL);
+  return (command_not_found(cmd[0]));
 }
 
 void	my_simple_exec(char **cmd, char **path, t_env *env)

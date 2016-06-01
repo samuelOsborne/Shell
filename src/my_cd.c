@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 ** 
 ** Started on  Fri May 20 12:51:22 2016 Lucas Villeneuve
-** Last update Tue May 31 11:09:05 2016 Lucas Villeneuve
+** Last update Wed Jun  1 10:45:20 2016 Lucas Villeneuve
 */
 
 #include <string.h>
@@ -51,7 +51,7 @@ void	my_cd_dash(t_cd *cd)
 {
   if (cd->old == NULL || cd->pwd == NULL)
     {
-      my_put_err("Error directory\n");
+      my_put_err(": No such file or directory.\n");
       return ;
     }
   if (chdir(cd->old) == -1)
@@ -66,15 +66,12 @@ void	my_cd_dash(t_cd *cd)
 
 void	my_simple_cd(t_cd *cd, char **cmd)
 {
-  if (cd->old == NULL || cd->pwd == NULL)
-    {
-      my_put_err("Error directory\n");
-      return ;
-    }
   if (chdir(cmd[1]) == -1)
     my_put_err("Wrong directory\n");
   else
     {
+      if (cd->old == NULL || cd->pwd == NULL)
+	return ;
       update_cd(cd, strlen(cd->pwd) + strlen(cmd[1]) + 2);
       getcwd(cd->pwd, strlen(cd->old) + strlen(cmd[1]) + 2);
     }
@@ -92,10 +89,7 @@ void	my_cd(t_all *all, char **cmd)
       else
 	{
 	  if (all->cd.pwd == NULL)
-	    {
-	      my_put_err("Can't update PWD\n");
-	      return ;
-	    }
+	    return ;
 	  update_cd(&all->cd, strlen(tmp) + 1);
 	  strcpy(all->cd.pwd, tmp);
 	  free(tmp);

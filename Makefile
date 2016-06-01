@@ -5,7 +5,7 @@
 ## Login   <villen_l@epitech.net>
 ##
 ## Started on  Wed May 11 16:00:21 2016 Lucas Villeneuve
-## Last update Tue May 31 18:24:44 2016 Lucas Villeneuve
+## Last update Wed Jun  1 10:52:37 2016 Lucas Villeneuve
 ##
 
 NAME	=	42sh
@@ -37,7 +37,8 @@ SRC	=	src/main.c			\
 		src/check_pipe.c		\
 		src/count_wordpipe.c		\
 		src/my_ctrl_c.c			\
-		src/loop_pipe.c
+		src/loop_pipe.c			\
+		src/command_not_found.c
 
 OBJ	=	$(SRC:.c=.o)
 

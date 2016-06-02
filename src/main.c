@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 **
 ** Started on  Wed May 11 15:59:33 2016 Lucas Villeneuve
-** Last update Thu Jun  2 12:38:31 2016 escorn_t
+** Last update Thu Jun  2 12:12:51 2016 Lucas Villeneuve
 */
 
 #include <stdio.h>
@@ -33,6 +33,7 @@ void		main_loop(t_all *all)
       init_all(all);
       if ((all->tree->cmd = get_next_line(0)) == NULL)
 	return ;
+      all->status = 0;
       create_tree(all->tree);
       i = 0;
       while (all->tree->next[i] != NULL)
@@ -51,7 +52,7 @@ void		main_loop(t_all *all)
     }
 }
 
-void		ini_shell(char **ae)
+int		ini_shell(char **ae)
 {
   t_all		all;
 
@@ -62,17 +63,16 @@ void		ini_shell(char **ae)
   all.tty = isatty(0);
   all.cd.old = my_getenv(all.env.tab, "OLDPWD=");
   all.cd.pwd = my_getenv(all.env.tab, "PWD=");
+  all.status = 0;
   if (signal(SIGINT, sig_finder) == SIG_ERR)
-    return ;
+    return (1);
   main_loop(&all);
+  return (all.status);
 }
 
-int		main(int argc, char **argv, char **env)
+int		main(__attribute__((unused))int argc,
+		     __attribute__((unused))char **argv,
+		     char **env)
 {
-  (void)argc;
-  (void)argv;
-  if (!env[0])
-    my_put_err("Env is NULL\n");
-  ini_shell(env);
-  return (0);
+  return (ini_shell(env));
 }

@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 **
 ** Started on  Fri May 13 17:15:58 2016 Lucas Villeneuve
-** Last update Wed Jun  1 15:28:24 2016 Lucas Villeneuve
+** Last update Thu Jun  2 12:03:57 2016 Lucas Villeneuve
 */
 
 #include <string.h>

@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 **
 ** Started on  Thu May 12 16:51:55 2016 Lucas Villeneuve
-** Last update Thu Jun  2 11:48:17 2016 Lucas Villeneuve
+** Last update Thu Jun  2 12:17:14 2016 Lucas Villeneuve
 */
 
 #include <sys/types.h>
@@ -75,7 +75,8 @@ char	*find_bin(char **path, char **cmd)
 
   if (cmd[0][0] == '.' || cmd[0][0] == '/')
     return (check_relative_path(cmd));
-  ret = -1;
+  if ((ret = access(cmd[0], F_OK | X_OK)) == 0)
+    return (cmd[0]);
   i = 0;
   while (ret == -1 && path[i])
     {
@@ -116,4 +117,6 @@ void	my_simple_exec(t_all *all, char **cmd, char **path, t_env *env)
 	    my_put_err("Floating exception (core dumped)\n");
 	}
     }
+  else
+    all->status = 1;
 }

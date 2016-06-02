@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 **
 ** Started on  Wed May 25 16:27:43 2016 Lucas Villeneuve
-** Last update Thu Jun  2 10:49:39 2016 escorn_t
+** Last update Thu Jun  2 12:08:46 2016 Lucas Villeneuve
 */
 
 #include <string.h>
@@ -43,5 +43,7 @@ void	my_exec_pipe(char **cmd, char **path, t_env *env, t_all *all)
     cmd[0] = find_bin_without_path(cmd);
   if (cmd[0] != NULL)
     execve(cmd[0], cmd, env->tab);
+  else
+    all->status = 1;
   exit(0);
 }

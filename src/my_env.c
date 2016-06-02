@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 ** 
 ** Started on  Wed May 11 18:24:46 2016 Lucas Villeneuve
-** Last update Mon May 16 15:21:02 2016 Lucas Villeneuve
+** Last update Wed Jun  1 14:45:45 2016 Lucas Villeneuve
 */
 
 #include <string.h>
@@ -42,6 +42,14 @@ void	my_setenv(char **cmd, t_env *env)
 	  strcat(env->tab[i], "=");
 	  strcat(env->tab[i], cmd[2]);
 	}
+      else if (i != -1)
+	{
+	  free(env->tab[i]);
+	  if ((env->tab[i] = calloc(strlen(cmd[1]) + 2, sizeof(char))) == NULL)
+	    error_malloc();
+	  strcpy(env->tab[i], cmd[1]);
+	  strcat(env->tab[i], "=");
+	}
       else if (i == -1)
 	{
 	  env->size++;
@@ -59,13 +67,14 @@ void	my_unsetenv(char **cmd, t_env *env)
   if (cmd[1] != NULL)
     {
       i = my_getenv_line(env->tab, cmd[1]);
-      if (i == -1)
-	my_put_err("Can't find the var\n");
-      env->size--;
-      env->tab = recreate_tab_unset(env->tab, env->size, i);
+      if (i != -1)
+	{
+	  env->size--;
+	  env->tab = recreate_tab_unset(env->tab, env->size, i);
+	}
     }
   else
-    my_put_err("No arguments\n");
+    my_put_err("unsetenv: Too few arguments.\n");
 }
 
 char	**create_env(char **ae, int i)

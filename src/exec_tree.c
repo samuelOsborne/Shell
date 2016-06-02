@@ -5,7 +5,7 @@
 ** Login   <escorn_t@epitech.net>
 **
 ** Started on  Wed May 25 15:53:57 2016 escorn_t
-** Last update Thu Jun  2 12:36:41 2016 escorn_t
+** Last update Thu Jun  2 12:39:32 2016 escorn_t
 */
 
 #include <stdio.h>
@@ -18,6 +18,7 @@ int		launch_exec(t_tree *tree, t_all *all)
   char		**tab;
 
   /* tree->cmd = merge_alias(all, tree->cmd); */
+  printf("cmd : %s\n", tree->cmd);
   tab = my_str_to_wordpipe(epurstr(tree->cmd));
   find_type_cmd(tab, all);
   free_tab(tab);
@@ -33,12 +34,11 @@ int		get_nb_separators(char *s)
   compt = 0;
   while (s[i])
     {
-      if (s[i] == '|' || s[i] == '&')
-	if (s[i + 1] == s[i])
-	  {
-	    compt++;
-	    i++;
-	  }
+      if ((s[i] == '|' && s[i + 1] == '|') || (s[i] == '&' && s[i + 1] == '&'))
+	{
+	  compt++;
+	  i += 2;
+	}
       i++;
     }
   return (compt);
@@ -87,6 +87,7 @@ int		create_exec_tree(t_tree *tree)
   int		cmpt_sep;
 
   cmpt_sep = get_nb_separators(tree->cmd);
+  printf("cmpt_sep : %d\n", cmpt_sep);
   i = 0;
   if ((tree->next = malloc((cmpt_sep + 2) * sizeof(t_tree *))) == NULL)
     error_malloc();

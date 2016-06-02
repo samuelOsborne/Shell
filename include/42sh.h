@@ -5,7 +5,7 @@
 ** Login   <escorn_t@epitech.net>
 **
 ** Started on  Wed May 11 13:26:46 2016 escorn_t
-** Last update Wed Jun  1 15:43:29 2016 escorn_t
+** Last update Thu Jun  2 11:49:05 2016 Lucas Villeneuve
 */
 
 #ifndef _42SH_H_
@@ -97,7 +97,6 @@ int	create_exec_tree(t_tree *tree);
 int	launch_exec(t_tree *tree, t_all *all);
 int	launch_condition(t_all *all, char *spec, int pos);
 char	*epurstr(char *str);
-char	*got_right(char *cmd);
 char	*get_next_line(int fd);
 char	*command_not_found(char *cmd);
 char	*my_getenv(char **env, char *str);

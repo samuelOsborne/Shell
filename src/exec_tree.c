@@ -5,7 +5,7 @@
 ** Login   <escorn_t@epitech.net>
 **
 ** Started on  Wed May 25 15:53:57 2016 escorn_t
-** Last update Wed Jun  1 15:24:34 2016 escorn_t
+** Last update Thu Jun  2 12:36:41 2016 escorn_t
 */
 
 #include <stdio.h>
@@ -41,7 +41,7 @@ int		get_nb_separators(char *s)
 	  }
       i++;
     }
-  return (compt + 1);
+  return (compt);
 }
 
 char		*get_last_cmd(char *s, int pos)
@@ -58,16 +58,16 @@ char		*get_last_cmd(char *s, int pos)
     error_malloc();
   while (cmpt < pos)
     {
-      while (s[i] && (s[i] != '|' || s[i] != '&') && s[i] != s[i + 1])
+      while (s[i] && ((s[i] != '|' && s[i] != '&') || s[i + 1] != s[i]))
 	i++;
       if (s[i])
 	i = i + 2;
       cmpt++;
     }
-  while (s[i] && (s[i] != '|' || s[i] != '&') && s[i] != s[i + 1])
+  while (s[i] && ((s[i] != '|' && s[i] != '&') || s[i + 1] != s[i]))
     res[j++] = s[i++];
   res[j] = 0;
-  return (res);
+  return (epurstr(res));
 }
 
 t_tree		*new_tree_next(char *cmd, int pos)
@@ -96,6 +96,6 @@ int		create_exec_tree(t_tree *tree)
       i++;
     }
   tree->next[i] = NULL;
-  get_spec(tree, cmpt_sep - 1);
+  get_spec(tree, cmpt_sep);
   return (0);
 }

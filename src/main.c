@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 **
 ** Started on  Wed May 11 15:59:33 2016 Lucas Villeneuve
-** Last update Thu Jun  2 12:12:51 2016 Lucas Villeneuve
+** Last update Fri Jun  3 16:18:24 2016 escorn_t
 */
 
 #include <stdio.h>
@@ -31,7 +31,7 @@ void		main_loop(t_all *all)
   while (42)
     {
       init_all(all);
-      if ((all->tree->cmd = get_next_line(0)) == NULL)
+      if ((all->tree->cmd = epurstr(get_next_line(0))) == NULL)
 	return ;
       all->status = 0;
       create_tree(all->tree);

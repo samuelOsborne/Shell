@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 **
 ** Started on  Thu May 12 16:51:55 2016 Lucas Villeneuve
-** Last update Thu Jun  2 19:38:03 2016 Lucas Villeneuve
+** Last update Fri Jun  3 17:52:32 2016 Lucas Villeneuve
 */
 
 #include <sys/types.h>
@@ -112,11 +112,7 @@ void	my_simple_exec(t_all *all, char **cmd, char **path, t_env *env)
       else
 	{
 	  wait(&status);
-	  all->status = WTERMSIG(status);
-	  if (all->status == SIGSEGV)
-	    my_put_err("Segmentation fault (core dumped)\n");
-	  else if (all->status == SIGFPE)
-	    my_put_err("Floating exception (core dumped)\n");
+	  error_status(status, all);
 	}
     }
   else

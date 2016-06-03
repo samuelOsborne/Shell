@@ -5,9 +5,10 @@
 ** Login   <villen_l@epitech.net>
 ** 
 ** Started on  Wed May 11 17:00:47 2016 Lucas Villeneuve
-** Last update Tue May 24 11:52:06 2016 Lucas Villeneuve
+** Last update Fri Jun  3 17:53:58 2016 Lucas Villeneuve
 */
 
+#include <signal.h>
 #include <stdlib.h>
 #include "42sh.h"
 
@@ -23,4 +24,20 @@ int	error_pipe(char c)
   my_putchar_err(c);
   my_putchar_err('\n');
   return (2);
+}
+
+void	error_command_pipe(char *str)
+{
+  my_put_err(str);
+  my_put_err(": Command not found.\n");
+  exit(1);
+}
+
+void	error_status(int status, t_all *all)
+{
+  all->status = WTERMSIG(status);
+  if (all->status == SIGSEGV)
+    my_put_err("Segmentation fault (core dumped)\n");
+  else if (all->status == SIGFPE)
+    my_put_err("Floating exception (core dumped)\n");
 }

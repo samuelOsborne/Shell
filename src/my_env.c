@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 ** 
 ** Started on  Wed May 11 18:24:46 2016 Lucas Villeneuve
-** Last update Wed Jun  1 14:45:45 2016 Lucas Villeneuve
+** Last update Fri Jun  3 17:44:26 2016 Lucas Villeneuve
 */
 
 #include <string.h>
@@ -23,6 +23,15 @@ void	print_env(t_env *env)
       my_putchar('\n');
       i++;
     }
+}
+
+void	my_setenv_reset(char **cmd, t_env *env, int i)
+{
+  free(env->tab[i]);
+  if ((env->tab[i] = calloc(strlen(cmd[1]) + 2, sizeof(char))) == NULL)
+    error_malloc();
+  strcpy(env->tab[i], cmd[1]);
+  strcat(env->tab[i], "=");
 }
 
 void	my_setenv(char **cmd, t_env *env)
@@ -43,13 +52,7 @@ void	my_setenv(char **cmd, t_env *env)
 	  strcat(env->tab[i], cmd[2]);
 	}
       else if (i != -1)
-	{
-	  free(env->tab[i]);
-	  if ((env->tab[i] = calloc(strlen(cmd[1]) + 2, sizeof(char))) == NULL)
-	    error_malloc();
-	  strcpy(env->tab[i], cmd[1]);
-	  strcat(env->tab[i], "=");
-	}
+	my_setenv_reset(cmd, env, i);
       else if (i == -1)
 	{
 	  env->size++;

@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 ** 
 ** Started on  Mon May 30 15:37:06 2016 Lucas Villeneuve
-** Last update Thu Jun  2 19:39:06 2016 Lucas Villeneuve
+** Last update Fri Jun  3 17:52:03 2016 Lucas Villeneuve
 */
 
 #include <string.h>
@@ -14,6 +14,11 @@
 #include <sys/wait.h>
 #include <unistd.h>
 #include "42sh.h"
+
+void	manage_status_pipe()
+{
+
+}
 
 void	manage_mode_pipe(t_pipe *cmd, t_fd *st_end, int j, t_all *all)
 {
@@ -44,11 +49,7 @@ int	fork_exec_pipe(t_fd *st_end, t_pipe *cmd, int j, t_all *all)
   else
     {
       wait(&status);
-      all->status = WTERMSIG(status);
-      if (all->status == SIGSEGV)
-	my_put_err("Segmentation fault (core dumped)\n");
-      else if (all->status == SIGFPE)
-	my_put_err("Floating exception (core dumped)\n");
+      error_status(status, all);
       if ((all->status = WEXITSTATUS(status)) != 0)
 	return (all->status);
     }
@@ -82,11 +83,7 @@ void		my_loop_pipe(char **tab, t_all *all, t_pipe *cmd)
 	exit(1);
       st_end.end = fd[1];
       if (fork_exec_pipe(&st_end, cmd, j, all) == 1)
-	{
-	  my_put_err(cmd[j].tab[0]);
-	  my_put_err(": Command not found.\n");
-	  exit(1);
-	}
+	error_command_pipe(cmd[j].tab[0]);
       close(fd[1]);
       st_end.start = fd[0];
       j += 2;

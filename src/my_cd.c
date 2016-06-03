@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 ** 
 ** Started on  Fri May 20 12:51:22 2016 Lucas Villeneuve
-** Last update Wed Jun  1 13:35:22 2016 Lucas Villeneuve
+** Last update Thu Jun  2 13:33:00 2016 Lucas Villeneuve
 */
 
 #include <errno.h>
@@ -48,27 +48,25 @@ void	swap_cd(t_cd *cd)
   free(tmp2);
 }
 
-void	my_cd_dash(t_cd *cd)
+void	my_cd_dash(t_cd *cd, t_all *all)
 {
   if (cd->old == NULL || cd->pwd == NULL)
     {
       my_put_err(": No such file or directory.\n");
+      all->status = 1;
       return ;
     }
   if (chdir(cd->old) == -1)
     {
       my_put_err(cd->old);
       my_put_err(": No such file or directory.\n");
+      all->status = 1;
     }
   else
-    {
-      my_putstr(cd->old);
-      my_putchar('\n');
-      swap_cd(cd);
-    }
+    swap_cd(cd);
 }
 
-void	my_simple_cd(t_cd *cd, char **cmd)
+void	my_simple_cd(t_cd *cd, char **cmd, t_all *all)
 {
   if (chdir(cmd[1]) == -1)
     {
@@ -82,13 +80,14 @@ void	my_simple_cd(t_cd *cd, char **cmd)
 	  my_put_err(cmd[1]);
 	  my_put_err(": Permission denied.\n");
 	}
+      all->status = 1;
     }
   else
     {
-      if (cd->old == NULL || cd->pwd == NULL)
-	return ;
-      update_cd(cd, strlen(cd->pwd) + strlen(cmd[1]) + 2);
-      getcwd(cd->pwd, strlen(cd->old) + strlen(cmd[1]) + 2);
+      if (cd->pwd != NULL)
+	update_cd(cd, strlen(cd->pwd) + strlen(cmd[1]) + 2);
+      if (cd->old != NULL)
+	getcwd(cd->pwd, strlen(cd->old) + strlen(cmd[1]) + 2);
     }
 }
 
@@ -100,7 +99,10 @@ void	my_cd(t_all *all, char **cmd)
     {
       tmp = my_getenv(all->env.tab, "HOME=");
       if (chdir(tmp) == -1)
-	my_put_err("No $home variable set.\n");
+	{
+	  my_put_err("No $home variable set.\n");
+	  all->status = 1;
+	}
       else
 	{
 	  if (all->cd.pwd == NULL)
@@ -111,7 +113,7 @@ void	my_cd(t_all *all, char **cmd)
 	}
     }
   else if (strcmp(cmd[1], "-") == 0)
-    my_cd_dash(&all->cd);
+    my_cd_dash(&all->cd, all);
   else
-    my_simple_cd(&all->cd, cmd);
+    my_simple_cd(&all->cd, cmd, all);
 }

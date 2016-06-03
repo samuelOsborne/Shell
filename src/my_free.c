@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 ** 
 ** Started on  Wed May 11 17:30:02 2016 Lucas Villeneuve
-** Last update Fri May 20 13:34:02 2016 Lucas Villeneuve
+** Last update Thu Jun  2 14:36:09 2016 Lucas Villeneuve
 */
 
 #include <stdlib.h>
@@ -26,10 +26,16 @@ void	free_tab(char **tab)
 void	free_tree(t_tree *tree)
 {
   int	i;
+  int	j;
 
   i = 0;
   while (tree->next[i] != NULL)
-    free(tree->next[i++]);
+    {
+      j = 0;
+      while (tree->next[i]->next[j] != NULL)
+	free(tree->next[i]->next[j++]);
+      free(tree->next[i++]);
+    }
   free(tree->next);
   free(tree->cmd);
   free(tree);

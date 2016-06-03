@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 **
 ** Started on  Wed May 25 16:27:43 2016 Lucas Villeneuve
-** Last update Thu Jun  2 12:08:46 2016 Lucas Villeneuve
+** Last update Thu Jun  2 19:15:26 2016 Lucas Villeneuve
 */
 
 #include <string.h>
@@ -34,7 +34,7 @@ int	count_nb_pipe(char **tab)
 void	my_exec_pipe(char **cmd, char **path, t_env *env, t_all *all)
 {
   if (check_builtin(cmd, all) == 1)
-    exit(0);
+    exit (0);
   if (cmd == NULL || cmd[0] == NULL)
     exit(1);
   if (path != NULL)
@@ -44,6 +44,5 @@ void	my_exec_pipe(char **cmd, char **path, t_env *env, t_all *all)
   if (cmd[0] != NULL)
     execve(cmd[0], cmd, env->tab);
   else
-    all->status = 1;
-  exit(0);
+    exit(1);
 }

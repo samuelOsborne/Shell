@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 **
 ** Started on  Thu May 12 16:51:55 2016 Lucas Villeneuve
-** Last update Thu Jun  2 12:17:14 2016 Lucas Villeneuve
+** Last update Thu Jun  2 19:38:03 2016 Lucas Villeneuve
 */
 
 #include <sys/types.h>
@@ -93,7 +93,8 @@ char	*find_bin(char **path, char **cmd)
 
 void	my_simple_exec(t_all *all, char **cmd, char **path, t_env *env)
 {
-   int	pid;
+  int	pid;
+  int	status;
 
   if (path != NULL)
     cmd[0] = find_bin(path, cmd);
@@ -110,10 +111,11 @@ void	my_simple_exec(t_all *all, char **cmd, char **path, t_env *env)
 	}
       else
 	{
-	  wait(&all->status);
-	  if (all->status == 11 || all->status == 139 || all->status == SIGSEGV)
+	  wait(&status);
+	  all->status = WTERMSIG(status);
+	  if (all->status == SIGSEGV)
 	    my_put_err("Segmentation fault (core dumped)\n");
-	  else if (all->status == SIGFPE || all->status == 136 || all->status == 8)
+	  else if (all->status == SIGFPE)
 	    my_put_err("Floating exception (core dumped)\n");
 	}
     }

@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 ** 
 ** Started on  Mon May 30 15:37:06 2016 Lucas Villeneuve
-** Last update Wed Jun  1 14:01:55 2016 Lucas Villeneuve
+** Last update Thu Jun  2 19:39:06 2016 Lucas Villeneuve
 */
 
 #include <string.h>
@@ -23,13 +23,13 @@ void	manage_mode_pipe(t_pipe *cmd, t_fd *st_end, int j, t_all *all)
     my_exec_pipe(cmd[j + 2].tab, all->path, &all->env, all);
 }
 
-void	fork_exec_pipe(t_fd *st_end, t_pipe *cmd, int j, t_all *all)
+int	fork_exec_pipe(t_fd *st_end, t_pipe *cmd, int j, t_all *all)
 {
   pid_t	pid;
   int	status;
 
   if ((pid = fork()) == -1)
-    return ;
+    return (1);
   else if (pid == 0)
     {
       manage_start_pipe(st_end, cmd, j, all);
@@ -44,11 +44,15 @@ void	fork_exec_pipe(t_fd *st_end, t_pipe *cmd, int j, t_all *all)
   else
     {
       wait(&status);
-      if (status == 11 || status == 139 || status == SIGSEGV)
+      all->status = WTERMSIG(status);
+      if (all->status == SIGSEGV)
 	my_put_err("Segmentation fault (core dumped)\n");
-      else if (status == SIGFPE || status == 136 || status == 8)
+      else if (all->status == SIGFPE)
 	my_put_err("Floating exception (core dumped)\n");
+      if ((all->status = WEXITSTATUS(status)) != 0)
+	return (all->status);
     }
+  return (0);
 }
 
 void	end_loop_pipe(t_fd st_end, t_pipe *cmd, t_all *all, int j)
@@ -57,7 +61,6 @@ void	end_loop_pipe(t_fd st_end, t_pipe *cmd, t_all *all, int j)
     dup2(st_end.start, 0);
   if (strcmp(cmd[j - 1].tab[0], "|") == 0)
     my_exec_pipe(cmd[j].tab, all->path, &all->env, all);
-  exit(0);
 }
 
 void		my_loop_pipe(char **tab, t_all *all, t_pipe *cmd)
@@ -76,9 +79,14 @@ void		my_loop_pipe(char **tab, t_all *all, t_pipe *cmd)
   while (++i < nb_pipe)
     {
       if (pipe(fd) < 0)
-  	return ;
+	exit(1);
       st_end.end = fd[1];
-      fork_exec_pipe(&st_end, cmd, j, all);
+      if (fork_exec_pipe(&st_end, cmd, j, all) == 1)
+	{
+	  my_put_err(cmd[j].tab[0]);
+	  my_put_err(": Command not found.\n");
+	  exit(1);
+	}
       close(fd[1]);
       st_end.start = fd[0];
       j += 2;

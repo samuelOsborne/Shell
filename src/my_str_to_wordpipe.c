@@ -1,11 +1,11 @@
 /*
 ** my_str_to_wordpipe.c for 42sh in /media/home/villen_l/rendu/Tek1Semestre2/Shell/PSU_2015_42sh
-** 
+**
 ** Made by Lucas Villeneuve
 ** Login   <villen_l@epitech.net>
-** 
+**
 ** Started on  Mon May 23 10:24:30 2016 Lucas Villeneuve
-** Last update Thu May 26 13:47:31 2016 Lucas Villeneuve
+** Last update Fri Jun  3 15:59:44 2016 escorn_t
 */
 #include <stdlib.h>
 #include <string.h>
@@ -104,6 +104,5 @@ char	**my_str_to_wordpipe(char *str)
       error_malloc();
   tab = put_in_wordpipe(tab, str);
   tab[nb_args] = NULL;
-  free(str);
   return (tab);
 }

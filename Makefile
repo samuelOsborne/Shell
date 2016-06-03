@@ -5,7 +5,7 @@
 ## Login   <villen_l@epitech.net>
 ##
 ## Started on  Wed May 11 16:00:21 2016 Lucas Villeneuve
-## Last update Wed Jun  1 15:10:11 2016 escorn_t
+## Last update Fri Jun  3 15:35:00 2016 escorn_t
 ##
 
 NAME	=	42sh
@@ -48,7 +48,7 @@ CC	=	gcc
 
 RM	=	rm -rf
 
-CFLAGS	=	-I include -W -Wall -Wextra
+CFLAGS	=	-I include -W -Wall -Wextra -g
 
 $(NAME):$(OBJ)
 	$(CC) -o $(NAME) $(OBJ)

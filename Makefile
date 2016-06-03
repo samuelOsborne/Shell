@@ -5,7 +5,7 @@
 ## Login   <villen_l@epitech.net>
 ##
 ## Started on  Wed May 11 16:00:21 2016 Lucas Villeneuve
-## Last update Fri Jun  3 15:35:00 2016 escorn_t
+## Last update Fri Jun  3 18:52:56 2016 escorn_t
 ##
 
 NAME	=	42sh
@@ -40,7 +40,10 @@ SRC	=	src/main.c			\
 		src/loop_pipe.c			\
 		src/command_not_found.c		\
 		src/get_spec.c			\
-		src/exec_tree.c
+		src/exec_tree.c			\
+		src/alias_list.c		\
+		src/init_rc.c			\
+		src/merge_alias.c
 
 OBJ	=	$(SRC:.c=.o)
 

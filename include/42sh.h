@@ -5,53 +5,61 @@
 ** Login   <escorn_t@epitech.net>
 **
 ** Started on  Wed May 11 13:26:46 2016 escorn_t
-** Last update Thu Jun  2 11:51:46 2016 Lucas Villeneuve
+** Last update Fri Jun  3 18:45:05 2016 escorn_t
 */
 
 #ifndef _42SH_H_
 # define _42SH_H_
 
-typedef struct  s_tree
+typedef struct		s_tree
 {
-  char		*spec;
-  char		*cmd;
-  struct s_tree	**next;
-}		t_tree;
+  char			*spec;
+  char			*cmd;
+  struct s_tree		**next;
+}			t_tree;
 
-typedef struct	s_pipe
+typedef struct		s_pipe
 {
-  char		**tab;
-  int		type;
-}		t_pipe;
+  char			**tab;
+  int			type;
+}			t_pipe;
 
-typedef	struct	s_env
+typedef	struct		s_env
 {
-  int		size;
-  char		**tab;
-}		t_env;
+  int			size;
+  char			**tab;
+}			t_env;
 
-typedef struct	s_cd
+typedef struct		s_cd
 {
-  char		*old;
-  char		*pwd;
-}		t_cd;
+  char			*old;
+  char			*pwd;
+}			t_cd;
 
-typedef struct	s_fd
+typedef struct		s_fd
 {
-  int		start;
-  int		end;
-  int		mode;
-}		t_fd;
+  int			start;
+  int			end;
+  int			mode;
+}			t_fd;
 
-typedef struct	s_all
+typedef struct		s_alias
 {
-  t_env		env;
-  t_cd		cd;
-  t_tree	*tree;
-  char		**path;
-  int		tty;
-  int		status;
-}		t_all;
+  char			*alias;
+  char			*cmd;
+  struct s_alias	*next;
+}			t_alias;
+
+typedef struct		s_all
+{
+  t_alias		*alias;
+  t_env			env;
+  t_cd			cd;
+  t_tree		*tree;
+  char			**path;
+  int			tty;
+  int			status;
+}			t_all;
 
 void	error_malloc();
 void	free_cd(t_cd cd);
@@ -79,6 +87,9 @@ void	my_exec_pipe(char **cmd, char **path, t_env *env, t_all *all);
 void	manage_start_pipe(t_fd *st_end, t_pipe *cmd, int j, t_all *all);
 void	sig_finder(int sig);
 void	get_spec(t_tree *tree, int cmpt);
+void	put_alias_in_list(t_all *all, t_alias *new);
+int	init_rc(t_all *all);
+int	is_alias_valid(char *s);
 int	is_dir(char *cmd);
 int	error_pipe(char c);
 int	my_getnbr(char *str);
@@ -96,6 +107,9 @@ int	check_dollar(char **str, int i, int j, t_all *all);
 int	create_exec_tree(t_tree *tree);
 int	launch_exec(t_tree *tree, t_all *all);
 int	launch_condition(t_all *all, char *spec, int pos);
+char	*get_alias(char *s);
+char	*get_alias_cmd(char *s);
+char	*merge_alias(t_all *all, char *cmd);
 char	*epurstr(char *str);
 char	*get_next_line(int fd);
 char	*permission_denied(char *cmd);

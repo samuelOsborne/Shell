@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 **
 ** Started on  Wed May 11 15:59:33 2016 Lucas Villeneuve
-** Last update Fri Jun  3 16:18:24 2016 escorn_t
+** Last update Fri Jun  3 18:33:47 2016 escorn_t
 */
 
 #include <stdio.h>
@@ -64,6 +64,7 @@ int		ini_shell(char **ae)
   all.cd.old = my_getenv(all.env.tab, "OLDPWD=");
   all.cd.pwd = my_getenv(all.env.tab, "PWD=");
   all.status = 0;
+  init_rc(&all);
   if (signal(SIGINT, sig_finder) == SIG_ERR)
     return (1);
   main_loop(&all);

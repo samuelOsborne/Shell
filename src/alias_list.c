@@ -5,12 +5,38 @@
 ** Login   <escorn_t@epitech.net>
 **
 ** Started on  Wed May 18 12:23:22 2016 escorn_t
-** Last update Thu May 19 12:29:34 2016 escorn_t
+** Last update Sat Jun  4 16:42:41 2016 escorn_t
 */
 
 #include <string.h>
 #include <stdlib.h>
 #include "42sh.h"
+
+char		*get_prompt(char *s)
+{
+  char		*res;
+  int		i;
+  int		j;
+
+  i = 7;
+  j = 0;
+  if (!s)
+    {
+      res = strdup("-->");
+      return (res);
+    }
+  if (!s[0])
+    {
+      res = strdup("-->");
+      return (res);
+    }
+  if ((res = malloc(strlen(s))) == NULL)
+    error_malloc();
+  while (s[i])
+    res[j++] = s[i++];
+  res[j] = 0;
+  return (res);
+}
 
 int		is_alias_valid(char *s)
 {

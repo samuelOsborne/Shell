@@ -5,7 +5,7 @@
 ** Login   <escorn_t@epitech.net>
 **
 ** Started on  Wed May 11 13:26:46 2016 escorn_t
-** Last update Sat Jun  4 14:54:45 2016 Lucas Villeneuve
+** Last update Sat Jun  4 16:27:55 2016 escorn_t
 */
 
 #ifndef _42SH_H_
@@ -57,7 +57,9 @@ typedef struct		s_all
   t_cd			cd;
   t_tree		*tree;
   char			**path;
+  char			*prompt;
   int			tty;
+  int			lock_prompt;
   int			status;
 }			t_all;
 
@@ -119,6 +121,7 @@ char	*command_not_found(char *cmd);
 char	*my_getenv(char **env, char *str);
 char	*find_bin(char **path, char **cmd);
 char	*find_bin_without_path(char **cmd);
+char	*get_prompt(char *s);
 char	*merge_alias(t_all *all, char *cmd);
 char	**no_match(char **tab);
 char	**create_env(char **ae, int i);

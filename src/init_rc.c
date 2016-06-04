@@ -5,7 +5,7 @@
 ** Login   <escorn_t@epitech.net>
 **
 ** Started on  Mon May 16 14:23:23 2016 escorn_t
-** Last update Fri Jun  3 19:01:11 2016 escorn_t
+** Last update Sat Jun  4 16:45:05 2016 escorn_t
 */
 
 #include <stdio.h>
@@ -33,6 +33,7 @@ int		first_rc(int fd)
   write(fd, "osborn_s, costa_d and brami_a\n", 30);
   write(fd, "# This file can be used to preload alias'\n", 42);
   write(fd, "# Usage = alias:\"short_command=original command\"\n", 49);
+  write(fd, "\nprompt=-->\n", 12);
   return (1);
 }
 
@@ -41,22 +42,21 @@ int		read_in_rc(t_all *all, char *s)
   t_alias	*new;
 
   if (!s[0] || s[0] == '#')
+    return (1);
+  if (strncmp("prompt=", s, 7) == 0 && all->lock_prompt == 0)
     {
-      free(s);
-      return (1);
+      all->prompt = get_prompt(s);
+      all->lock_prompt++;
     }
-  if (is_alias_valid(s) == -1)
+  if (is_alias_valid(s) != -1)
     {
-      free(s);
-      return (1);
+      if ((new = malloc(sizeof(t_alias))) == NULL)
+	error_malloc();
+      new->alias = get_alias(s);
+      new->cmd = get_alias_cmd(s);
+      new->next = NULL;
+      put_alias_in_list(all, new);
     }
-  if ((new = malloc(sizeof(t_alias))) == NULL)
-    error_malloc();
-  new->alias = get_alias(s);
-  new->cmd = get_alias_cmd(s);
-  new->next = NULL;
-  put_alias_in_list(all, new);
-  free(s);
   return (0);
 }
 
@@ -91,6 +91,7 @@ int		init_rc(t_all *all)
   int		fd;
 
   all->alias = NULL;
+  all->prompt = "-->";
   home_path = path_rc(my_getenv(all->env.tab, "HOME="));
   if ((fd = open(home_path, O_CREAT | O_RDWR, 0644)) == -1)
     return (rc_err_message(home_path));
@@ -98,7 +99,10 @@ int		init_rc(t_all *all)
     return (first_rc(fd));
   free(s);
   while ((s = get_next_line(fd)) != NULL)
-    read_in_rc(all, s);
+    {
+      read_in_rc(all, s);
+      free(s);
+    }
   close(fd);
   free(home_path);
   return (0);

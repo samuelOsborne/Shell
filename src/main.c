@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 **
 ** Started on  Wed May 11 15:59:33 2016 Lucas Villeneuve
-** Last update Fri Jun  3 18:33:47 2016 escorn_t
+** Last update Sat Jun  4 16:46:54 2016 escorn_t
 */
 
 #include <stdio.h>
@@ -17,7 +17,7 @@
 void		init_all(t_all *all)
 {
   if (all->tty == 1)
-    my_putstr("-->");
+    my_putstr(all->prompt);
   if ((all->tree = calloc(1, sizeof(t_tree))) == NULL)
     error_malloc();
   all->path = my_str_to_wordtab(my_getenv(all->env.tab, "PATH="), ':');
@@ -64,6 +64,7 @@ int		ini_shell(char **ae)
   all.cd.old = my_getenv(all.env.tab, "OLDPWD=");
   all.cd.pwd = my_getenv(all.env.tab, "PWD=");
   all.status = 0;
+  all.lock_prompt = 0;
   init_rc(&all);
   if (signal(SIGINT, sig_finder) == SIG_ERR)
     return (1);

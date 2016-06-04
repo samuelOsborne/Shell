@@ -5,22 +5,13 @@
 ** Login   <villen_l@epitech.net>
 **
 ** Started on  Wed May 11 15:59:33 2016 Lucas Villeneuve
-** Last update Sat Jun  4 18:19:20 2016 Lucas Villeneuve
+** Last update Sat Jun  4 19:17:04 2016 Lucas Villeneuve
 */
 
 #include <signal.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include "42sh.h"
-
-void		init_all(t_all *all)
-{
-  if (all->tty == 1)
-    my_putstr(all->prompt);
-  if ((all->tree = calloc(1, sizeof(t_tree))) == NULL)
-    error_malloc();
-  all->path = my_str_to_wordtab(my_getenv(all->env.tab, "PATH="), ':');
-}
 
 void		main_loop(t_all *all)
 {

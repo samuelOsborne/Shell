@@ -5,17 +5,7 @@
 ** Login   <costa_d@epitech.net>
 **
 ** Started on  Thu May 26 18:12:03 2016 Arnaud Costa
-** Last update Sat Jun  4 18:18:59 2016 Lucas Villeneuve
+** Last update Sat Jun  4 19:15:31 2016 Lucas Villeneuve
 */
 
-#include <signal.h>
-#include "42sh.h"
 
-void	sig_finder(int sig)
-{
-  if (sig == SIGINT)
-    {
-      my_putstr("\b\b  \n");
-      my_putstr("-->");
-    }
-}

@@ -5,7 +5,7 @@
 ** Login   <escorn_t@epitech.net>
 **
 ** Started on  Wed May 11 13:26:46 2016 escorn_t
-** Last update Sat Jun  4 18:17:44 2016 Lucas Villeneuve
+** Last update Sat Jun  4 19:17:14 2016 Lucas Villeneuve
 */
 
 #ifndef _42SH_H_
@@ -59,7 +59,6 @@ typedef struct		s_all
   t_cd			cd;
   t_tree		*tree;
   char			**path;
-  char			*prompt;
   int			tty;
   int			lock_prompt;
   int			status;

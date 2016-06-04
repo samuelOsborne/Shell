@@ -5,7 +5,7 @@
 ## Login   <villen_l@epitech.net>
 ##
 ## Started on  Wed May 11 16:00:21 2016 Lucas Villeneuve
-## Last update Sat Jun  4 15:56:51 2016 Lucas Villeneuve
+## Last update Sat Jun  4 19:15:47 2016 Lucas Villeneuve
 ##
 
 NAME	=	42sh
@@ -36,7 +36,6 @@ SRC	=	src/main.c			\
 		src/manage_pipe.c		\
 		src/check_pipe.c		\
 		src/count_wordpipe.c		\
-		src/my_ctrl_c.c			\
 		src/loop_pipe.c			\
 		src/command_not_found.c		\
 		src/get_spec.c			\
@@ -44,7 +43,8 @@ SRC	=	src/main.c			\
 		src/alias_list.c		\
 		src/init_rc.c			\
 		src/merge_alias.c		\
-		src/globbing.c
+		src/globbing.c			\
+		src/prompt.c
 
 OBJ	=	$(SRC:.c=.o)
 

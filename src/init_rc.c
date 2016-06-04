@@ -5,7 +5,7 @@
 ** Login   <escorn_t@epitech.net>
 **
 ** Started on  Mon May 16 14:23:23 2016 escorn_t
-** Last update Sat Jun  4 18:07:12 2016 Lucas Villeneuve
+** Last update Sat Jun  4 19:15:34 2016 Lucas Villeneuve
 */
 
 #include <string.h>
@@ -35,30 +35,6 @@ int		first_rc(int fd, char *path)
   HEAD(fd, "# This file can be used to preload alias'\n");
   HEAD(fd, "# Usage = alias:\"command\"\n");
   HEAD(fd, "\nprompt=-->\n");
-  return (0);
-}
-
-int		read_in_rc(t_all *all, char *s)
-{
-  t_alias	*new;
-
-  if (!s[0] || s[0] == '#')
-    return (1);
-  if (strncmp("prompt=", s, 7) == 0 && all->lock_prompt == 0)
-    {
-      free(all->prompt);
-      all->prompt = get_prompt(s);
-      all->lock_prompt++;
-    }
-  if (is_alias_valid(s) != -1)
-    {
-      if ((new = malloc(sizeof(t_alias))) == NULL)
-	error_malloc();
-      new->alias = get_alias(s);
-      new->cmd = get_alias_cmd(s);
-      new->next = NULL;
-      put_alias_in_list(all, new);
-    }
   return (0);
 }
 
@@ -95,7 +71,7 @@ int		init_rc(t_all *all)
   int		fd;
 
   all->alias = NULL;
-  all->prompt = strdup("-->");
+  ini_prompt();
   if ((home_path = path_rc(my_getenv(all->env.tab, "HOME="))) == NULL)
     return (1);
   if ((fd = open(home_path, O_CREAT | O_RDWR, 0644)) == -1)

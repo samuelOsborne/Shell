@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 **
 ** Started on  Mon May 16 13:50:02 2016 Lucas Villeneuve
-** Last update Sat Jun  4 16:46:35 2016 Lucas Villeneuve
+** Last update Sat Jun  4 19:18:09 2016 Lucas Villeneuve
 */
 
 #include <stdlib.h>
@@ -27,8 +27,7 @@ void	my_simple_exit(char **cmd, t_all *all)
 	  tmp = tmp->next;
 	}
     }
-  if (all->prompt)
-    free(all->prompt);
+  free_prompt();
   free_tab(cmd);
   free_tree(all->tree);
   free_env(all->env);

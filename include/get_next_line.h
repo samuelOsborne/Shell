@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 ** 
 ** Started on  Mon Jan  4 11:04:10 2016 Lucas Villeneuve
-** Last update Wed May 11 17:20:42 2016 Lucas Villeneuve
+** Last update Sat Jun  4 13:22:49 2016 Lucas Villeneuve
 */
 
 #ifndef GET_NEXT_LINE_H_

@@ -5,7 +5,7 @@
 ## Login   <villen_l@epitech.net>
 ##
 ## Started on  Wed May 11 16:00:21 2016 Lucas Villeneuve
-## Last update Fri Jun  3 18:15:49 2016 Lucas Villeneuve
+## Last update Sat Jun  4 13:20:31 2016 Lucas Villeneuve
 ##
 
 NAME	=	42sh
@@ -43,7 +43,8 @@ SRC	=	src/main.c			\
 		src/exec_tree.c			\
 		src/alias_list.c		\
 		src/init_rc.c			\
-		src/merge_alias.c
+		src/merge_alias.c		\
+		src/globbing.c
 
 OBJ	=	$(SRC:.c=.o)
 
@@ -51,7 +52,7 @@ CC	=	gcc
 
 RM	=	rm -rf
 
-CFLAGS	=	-I include -W -Wall -Wextra
+CFLAGS	=	-I include -W -Wall -Wextra -g
 
 $(NAME):$(OBJ)
 	$(CC) -o $(NAME) $(OBJ)

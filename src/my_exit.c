@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 **
 ** Started on  Mon May 16 13:50:02 2016 Lucas Villeneuve
-** Last update Fri Jun  3 18:52:09 2016 escorn_t
+** Last update Sat Jun  4 13:21:43 2016 Lucas Villeneuve
 */
 
 #include <stdlib.h>
@@ -15,14 +15,17 @@ void	my_simple_exit(char **cmd, t_all *all)
 {
   t_alias	*tmp;
 
-  tmp = all->alias->next;
-  while (tmp != NULL)
+  if (all->alias)
     {
-      free(all->alias->cmd);
-      free(all->alias->alias);
-      free(all->alias);
-      all->alias = tmp;
-      tmp = tmp->next;
+      tmp = all->alias->next;
+      while (tmp != NULL)
+	{
+	  free(all->alias->cmd);
+	  free(all->alias->alias);
+	  free(all->alias);
+	  all->alias = tmp;
+	  tmp = tmp->next;
+	}
     }
   free_tab(cmd);
   free_tree(all->tree);

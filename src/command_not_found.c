@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 ** 
 ** Started on  Wed Jun  1 10:49:12 2016 Lucas Villeneuve
-** Last update Thu Jun  2 11:51:48 2016 Lucas Villeneuve
+** Last update Sat Jun  4 14:54:11 2016 Lucas Villeneuve
 */
 
 #include <sys/types.h>
@@ -21,6 +21,14 @@ int		is_dir(char *cmd)
   if (stat(cmd, &buffer) != 0)
     return (0);
   return (S_ISDIR(buffer.st_mode));
+}
+
+char	**no_match(char **tab)
+{
+  my_put_err(tab[0]);
+  my_put_err(": No match.\n");
+  free_tab(tab);
+  return (NULL);
 }
 
 char	*permission_denied(char *cmd)

@@ -5,9 +5,10 @@
 ** Login   <villen_l@epitech.net>
 **
 ** Started on  Fri May 13 17:15:58 2016 Lucas Villeneuve
-** Last update Thu Jun  2 13:42:04 2016 Lucas Villeneuve
+** Last update Sat Jun  4 14:51:39 2016 Lucas Villeneuve
 */
 
+#include <glob.h>
 #include <string.h>
 #include <stdlib.h>
 #include "42sh.h"
@@ -59,20 +60,24 @@ int	parse_for_pipe(char **tab)
   return (0);
 }
 
-void	find_type_cmd(char **tab, t_all *all)
+char	**find_type_cmd(char **tab, t_all *all)
 {
+  int	i;
+
   if (tab == NULL)
-    return ;
-  /* int	i; */
-  /* i = 0; */
-  /* while (tab[i]) */
-  /*   printf("%s\n", tab[i++]); */
+    return (NULL);
+  i = 0;
+  while (tab[i])
+    {
+      if (check_for_star(tab[i]) == 1)
+	if ((tab = my_glob(tab[i], tab, i)) == NULL)
+	  return (NULL);
+      i++;
+    }
   if (parse_for_pipe(tab) == 1)
     my_pipe(tab, all);
   else
-    {
-      if (check_builtin(tab, all) == 1)
-	return ;
+    if (check_builtin(tab, all) != 1)
       my_simple_exec(all, tab, all->path, &all->env);
-    }
+  return (tab);
 }

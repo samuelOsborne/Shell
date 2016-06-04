@@ -1,11 +1,11 @@
 /*
 ** prompt.c for 42sh in /media/home/villen_l/rendu/Tek1Semestre2/Shell/PSU_2015_42sh
-** 
+**
 ** Made by Lucas Villeneuve
 ** Login   <villen_l@epitech.net>
-** 
+**
 ** Started on  Sat Jun  4 19:12:16 2016 Lucas Villeneuve
-** Last update Sat Jun  4 19:20:17 2016 Lucas Villeneuve
+** Last update Sat Jun  4 21:23:21 2016 Arnaud Costa
 */
 
 #include <string.h>
@@ -37,7 +37,7 @@ int		read_in_rc(t_all *all, char *s)
     return (1);
   if (strncmp("prompt=", s, 7) == 0 && all->lock_prompt == 0)
     {
-      free(prompt);
+      free(g_prompt);
       g_prompt = get_prompt(s);
       all->lock_prompt++;
     }

@@ -5,7 +5,7 @@
 ** Login   <escorn_t@epitech.net>
 **
 ** Started on  Wed May 11 13:26:46 2016 escorn_t
-** Last update Sat Jun  4 19:17:14 2016 Lucas Villeneuve
+** Last update Sat Jun  4 21:28:28 2016 Arnaud Costa
 */
 
 #ifndef _42SH_H_
@@ -64,6 +64,8 @@ typedef struct		s_all
   int			status;
 }			t_all;
 
+void	ini_prompt();
+void	free_prompt();
 void	error_malloc();
 void	free_cd(t_cd cd);
 void	my_putchar(char c);
@@ -71,6 +73,7 @@ void	sig_finder(int sig);
 void	free_env(t_env env);
 void	free_tab(char **tab);
 void	my_putstr(char *str);
+void	init_all(t_all *all);
 void	print_env(t_env *env);
 void	my_put_err(char *str);
 void	my_putchar_err(char c);
@@ -104,6 +107,7 @@ int	check_for_star(char *str);
 int	count_nb_args(char **tab);
 int	create_exec_tree(t_tree *tree);
 int	count_args_wordpipe(char *str);
+int	read_in_rc(t_all *all, char *s);
 int	check_builtin(char **cmd, t_all *all);
 int	my_getenv_line(char **env, char *str);
 int	my_cd_builtin(char **cmd, t_all *all);

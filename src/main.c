@@ -5,10 +5,9 @@
 ** Login   <villen_l@epitech.net>
 **
 ** Started on  Wed May 11 15:59:33 2016 Lucas Villeneuve
-** Last update Sat Jun  4 16:46:54 2016 escorn_t
+** Last update Sat Jun  4 18:19:20 2016 Lucas Villeneuve
 */
 
-#include <stdio.h>
 #include <signal.h>
 #include <stdlib.h>
 #include <unistd.h>

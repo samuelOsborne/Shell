@@ -5,7 +5,7 @@
 ** Login   <escorn_t@epitech.net>
 **
 ** Started on  Wed May 18 12:23:22 2016 escorn_t
-** Last update Sat Jun  4 16:42:41 2016 escorn_t
+** Last update Sat Jun  4 18:00:05 2016 Lucas Villeneuve
 */
 
 #include <string.h>
@@ -25,7 +25,7 @@ char		*get_prompt(char *s)
       res = strdup("-->");
       return (res);
     }
-  if (!s[0])
+  if (!s[7])
     {
       res = strdup("-->");
       return (res);
@@ -45,11 +45,7 @@ int		is_alias_valid(char *s)
   i = 0;
   while (s[i] && s[i] != ':')
     i++;
-  if (i == 0)
-    return (-1);
-  if (!s[i])
-    return (-1);
-  if (s[i + 1] != '"')
+  if (i == 0 || !s[i] || s[i + 1] != '"')
     return (-1);
   if (!s[i + 2] || s[i + 2] == '"')
     return (-1);

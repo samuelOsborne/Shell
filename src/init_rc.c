@@ -5,10 +5,9 @@
 ** Login   <escorn_t@epitech.net>
 **
 ** Started on  Mon May 16 14:23:23 2016 escorn_t
-** Last update Sat Jun  4 16:45:05 2016 escorn_t
+** Last update Sat Jun  4 18:07:12 2016 Lucas Villeneuve
 */
 
-#include <stdio.h>
 #include <string.h>
 #include <unistd.h>
 #include <sys/types.h>
@@ -19,22 +18,24 @@
 
 int		rc_err_message(char *home_path)
 {
-  my_put_err("Failed to load .sh_rc, ");
+  my_put_err("Failed to load .42sh_rc, ");
   my_put_err("make sure you have the rights to access ");
   my_put_err(home_path);
   my_put_err("\n");
+  free(home_path);
   return (1);
 }
 
-int		first_rc(int fd)
+int		first_rc(int fd, char *path)
 {
-  write(fd, "# Configuration file for 42sh\n", 30);
-  write(fd, "# A project by escorn_t, villen_l, ", 35);
-  write(fd, "osborn_s, costa_d and brami_a\n", 30);
-  write(fd, "# This file can be used to preload alias'\n", 42);
-  write(fd, "# Usage = alias:\"short_command=original command\"\n", 49);
-  write(fd, "\nprompt=-->\n", 12);
-  return (1);
+  free(path);
+  HEAD(fd, "# Configuration file for 42sh\n");
+  HEAD(fd, "# A project by escorn_t, villen_l, ");
+  HEAD(fd, "osborn_s, costa_d and brami_a\n");
+  HEAD(fd, "# This file can be used to preload alias'\n");
+  HEAD(fd, "# Usage = alias:\"command\"\n");
+  HEAD(fd, "\nprompt=-->\n");
+  return (0);
 }
 
 int		read_in_rc(t_all *all, char *s)
@@ -45,6 +46,7 @@ int		read_in_rc(t_all *all, char *s)
     return (1);
   if (strncmp("prompt=", s, 7) == 0 && all->lock_prompt == 0)
     {
+      free(all->prompt);
       all->prompt = get_prompt(s);
       all->lock_prompt++;
     }
@@ -67,11 +69,13 @@ char		*path_rc(char *s)
   int		i;
   int		j;
 
+  if (s == NULL)
+    return (NULL);
   i = 0;
   j = 0;
-  if ((res = malloc(strlen(s) + strlen("/.shrc") + 1)) == NULL)
+  if ((res = malloc(strlen(s) + strlen("/.42shrc") + 1)) == NULL)
     error_malloc();
-  tmp = "/.shrc";
+  tmp = "/.42shrc";
   while (s[i])
     {
       res[i] = s[i];
@@ -91,12 +95,13 @@ int		init_rc(t_all *all)
   int		fd;
 
   all->alias = NULL;
-  all->prompt = "-->";
-  home_path = path_rc(my_getenv(all->env.tab, "HOME="));
+  all->prompt = strdup("-->");
+  if ((home_path = path_rc(my_getenv(all->env.tab, "HOME="))) == NULL)
+    return (1);
   if ((fd = open(home_path, O_CREAT | O_RDWR, 0644)) == -1)
     return (rc_err_message(home_path));
   if ((s = get_next_line(fd)) == NULL)
-    return (first_rc(fd));
+    return (first_rc(fd, home_path));
   free(s);
   while ((s = get_next_line(fd)) != NULL)
     {

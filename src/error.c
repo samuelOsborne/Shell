@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 ** 
 ** Started on  Wed May 11 17:00:47 2016 Lucas Villeneuve
-** Last update Sat Jun  4 15:40:59 2016 Lucas Villeneuve
+** Last update Sat Jun  4 19:50:36 2016 Lucas Villeneuve
 */
 
 #include <signal.h>
@@ -36,7 +36,7 @@ void	error_command_pipe(char *str)
 void	error_status(int status)
 {
   if (WTERMSIG(status) == SIGSEGV)
-    my_put_err("Segmentation fault (core dumped)\n");
+    my_put_err("Segmentation fault\n");
   else if (WTERMSIG(status) == SIGFPE)
-    my_put_err("Floating exception (core dumped)\n");
+    my_put_err("Floating exception\n");
 }

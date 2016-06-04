@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 **
 ** Started on  Fri May 13 17:15:58 2016 Lucas Villeneuve
-** Last update Sat Jun  4 14:51:39 2016 Lucas Villeneuve
+** Last update Sat Jun  4 15:54:32 2016 Lucas Villeneuve
 */
 
 #include <glob.h>
@@ -66,6 +66,8 @@ char	**find_type_cmd(char **tab, t_all *all)
 
   if (tab == NULL)
     return (NULL);
+  if (strlen(tab[0]) == 0)
+    return (tab);
   i = 0;
   while (tab[i])
     {

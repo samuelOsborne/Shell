@@ -5,10 +5,9 @@
 ** Login   <escorn_t@epitech.net>
 **
 ** Started on  Wed May 25 15:53:57 2016 escorn_t
-** Last update Sat Jun  4 14:52:42 2016 Lucas Villeneuve
+** Last update Sat Jun  4 15:43:56 2016 Lucas Villeneuve
 */
 
-#include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include "42sh.h"
@@ -20,6 +19,8 @@ int		launch_exec(t_tree *tree, t_all *all)
   tree->cmd = merge_alias(all, tree->cmd);
   tree->cmd = epurstr(tree->cmd);
   tab = my_str_to_wordpipe(tree->cmd);
+  if (tab == NULL)
+    return (1);
   tab = find_type_cmd(tab, all);
   if (tab != NULL)
     free_tab(tab);

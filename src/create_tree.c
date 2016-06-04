@@ -5,7 +5,7 @@
 ** Login   <escorn_t@epitech.net>
 **
 ** Started on  Wed May 11 18:45:52 2016 escorn_t
-** Last update Fri Jun  3 16:01:40 2016 escorn_t
+** Last update Sat Jun  4 15:22:52 2016 Lucas Villeneuve
 */
 
 #include <string.h>

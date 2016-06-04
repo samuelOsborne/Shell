@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 ** 
 ** Started on  Mon May 30 15:37:06 2016 Lucas Villeneuve
-** Last update Fri Jun  3 17:52:03 2016 Lucas Villeneuve
+** Last update Sat Jun  4 15:41:21 2016 Lucas Villeneuve
 */
 
 #include <string.h>
@@ -14,11 +14,6 @@
 #include <sys/wait.h>
 #include <unistd.h>
 #include "42sh.h"
-
-void	manage_status_pipe()
-{
-
-}
 
 void	manage_mode_pipe(t_pipe *cmd, t_fd *st_end, int j, t_all *all)
 {
@@ -49,7 +44,7 @@ int	fork_exec_pipe(t_fd *st_end, t_pipe *cmd, int j, t_all *all)
   else
     {
       wait(&status);
-      error_status(status, all);
+      error_status(status);
       if ((all->status = WEXITSTATUS(status)) != 0)
 	return (all->status);
     }
@@ -62,6 +57,8 @@ void	end_loop_pipe(t_fd st_end, t_pipe *cmd, t_all *all, int j)
     dup2(st_end.start, 0);
   if (strcmp(cmd[j - 1].tab[0], "|") == 0)
     my_exec_pipe(cmd[j].tab, all->path, &all->env, all);
+  else
+    exit(0);
 }
 
 void		my_loop_pipe(char **tab, t_all *all, t_pipe *cmd)

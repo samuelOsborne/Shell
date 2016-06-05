@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 ** 
 ** Started on  Fri May 20 12:51:22 2016 Lucas Villeneuve
-** Last update Thu Jun  2 13:33:00 2016 Lucas Villeneuve
+** Last update Sun Jun  5 13:02:52 2016 Lucas Villeneuve
 */
 
 #include <errno.h>
@@ -70,16 +70,13 @@ void	my_simple_cd(t_cd *cd, char **cmd, t_all *all)
 {
   if (chdir(cmd[1]) == -1)
     {
+      my_put_err(cmd[1]);
       if (errno == ENOENT)
-	{
-	  my_put_err(cmd[1]);
-	  my_put_err(": No such file or directory.\n");
-	}
+	my_put_err(": No such file or directory.\n");
       else if (errno == EACCES)
-	{
-	  my_put_err(cmd[1]);
-	  my_put_err(": Permission denied.\n");
-	}
+	my_put_err(": Permission denied.\n");
+      else if (errno == ENOTDIR)
+	my_put_err(": Not a directory.\n");
       all->status = 1;
     }
   else

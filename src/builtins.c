@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 ** 
 ** Started on  Fri May 13 17:32:16 2016 Lucas Villeneuve
-** Last update Fri May 20 13:28:06 2016 Lucas Villeneuve
+** Last update Sun Jun  5 12:39:20 2016 Lucas Villeneuve
 */
 
 #include <stdlib.h>
@@ -45,18 +45,16 @@ int	my_exit_env_echo(char **cmd, t_all *all)
 
 int	my_setenv_builtin(char **cmd, t_all *all)
 {
-  (void)all;
   if (strcmp(cmd[0], "setenv") != 0)
     return (0);
-  my_setenv(cmd, &all->env);
+  my_setenv(cmd, &all->env, all);
   return (1);
 }
 
 int	my_unsetenv_builtin(char **cmd, t_all *all)
 {
-  (void)all;
   if (strcmp(cmd[0], "unsetenv") != 0)
     return (0);
-  my_unsetenv(cmd, &all->env);
+  my_unsetenv(cmd, &all->env, all);
   return (1);
 }

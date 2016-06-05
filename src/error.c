@@ -5,9 +5,10 @@
 ** Login   <villen_l@epitech.net>
 ** 
 ** Started on  Wed May 11 17:00:47 2016 Lucas Villeneuve
-** Last update Sat Jun  4 19:50:36 2016 Lucas Villeneuve
+** Last update Sun Jun  5 13:15:12 2016 Lucas Villeneuve
 */
 
+#include <unistd.h>
 #include <signal.h>
 #include <stdlib.h>
 #include "42sh.h"
@@ -33,10 +34,18 @@ void	error_command_pipe(char *str)
   exit(1);
 }
 
-void	error_status(int status)
+void	error_status(int status, t_all *all)
 {
   if (WTERMSIG(status) == SIGSEGV)
-    my_put_err("Segmentation fault\n");
+    {
+      my_put_err("Segmentation fault\n");
+      all->status = status;
+    }
   else if (WTERMSIG(status) == SIGFPE)
-    my_put_err("Floating exception\n");
+    {
+      my_put_err("Floating exception\n");
+      all->status = status;
+    }
+  else
+    all->status = WEXITSTATUS(status);
 }

@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 ** 
 ** Started on  Mon May 30 15:37:06 2016 Lucas Villeneuve
-** Last update Sat Jun  4 15:41:21 2016 Lucas Villeneuve
+** Last update Sun Jun  5 13:17:03 2016 Lucas Villeneuve
 */
 
 #include <string.h>
@@ -44,8 +44,8 @@ int	fork_exec_pipe(t_fd *st_end, t_pipe *cmd, int j, t_all *all)
   else
     {
       wait(&status);
-      error_status(status);
-      if ((all->status = WEXITSTATUS(status)) != 0)
+      error_status(status, all);
+      if (all->status != 0)
 	return (all->status);
     }
   return (0);

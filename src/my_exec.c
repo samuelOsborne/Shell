@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 **
 ** Started on  Thu May 12 16:51:55 2016 Lucas Villeneuve
-** Last update Sat Jun  4 15:42:06 2016 Lucas Villeneuve
+** Last update Sun Jun  5 13:15:30 2016 Lucas Villeneuve
 */
 
 #include <sys/types.h>
@@ -112,7 +112,7 @@ void	my_simple_exec(t_all *all, char **cmd, char **path, t_env *env)
       else
 	{
 	  wait(&status);
-	  error_status(status);
+	  error_status(status, all);
 	}
     }
   else

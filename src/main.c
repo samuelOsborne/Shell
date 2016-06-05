@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 **
 ** Started on  Wed May 11 15:59:33 2016 Lucas Villeneuve
-** Last update Sun Jun  5 12:42:04 2016 Lucas Villeneuve
+** Last update Sun Jun  5 13:21:59 2016 Lucas Villeneuve
 */
 
 #include <signal.h>
@@ -59,7 +59,6 @@ int		ini_shell(char **ae)
   if (signal(SIGINT, sig_finder) == SIG_ERR)
     return (1);
   main_loop(&all);
-  printf("status : %d\n", all.status);
   return (all.status);
 }
 

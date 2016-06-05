@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 **
 ** Started on  Tue May 24 10:34:19 2016 Lucas Villeneuve
-** Last update Sat Jun  4 15:47:28 2016 Lucas Villeneuve
+** Last update Sun Jun  5 13:16:58 2016 Lucas Villeneuve
 */
 
 #include <sys/types.h>
@@ -33,7 +33,6 @@ void		my_pipe(char **tab, t_all *all)
   else
     {
       wait(&status);
-      error_status(status);
-      all->status = WEXITSTATUS(status);
+      error_status(status, all);
     }
 }

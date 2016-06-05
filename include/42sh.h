@@ -5,7 +5,7 @@
 ** Login   <escorn_t@epitech.net>
 **
 ** Started on  Wed May 11 13:26:46 2016 escorn_t
-** Last update Sun Jun  5 12:52:24 2016 Lucas Villeneuve
+** Last update Sun Jun  5 13:29:38 2016 Lucas Villeneuve
 */
 
 #ifndef _42SH_H_
@@ -79,12 +79,12 @@ void	my_put_err(char *str);
 void	my_putchar_err(char c);
 void	free_path(char **path);
 void	free_tree(t_tree *tree);
-void	error_status(int status);
 void	error_command_pipe(char *str);
 void	my_cd(t_all *all, char **cmd);
 void	my_pipe(char **tab, t_all *all);
 void	my_echo(char **cmd, t_all *all);
 void	get_spec(t_tree *tree, int cmpt);
+void	error_status(int status, t_all *all);
 void	my_simple_exit(char **cmd, t_all *all);
 void	put_alias_in_list(t_all *all, t_alias *new);
 void	manage_end_pipe(int end, t_pipe *cmd, int j);
@@ -115,6 +115,7 @@ int	my_cd_builtin(char **cmd, t_all *all);
 int	launch_exec(t_tree *tree, t_all *all);
 int	my_exit_env_echo(char **cmd, t_all *all);
 int	my_setenv_builtin(char **cmd, t_all *all);
+int	write_dollar(char *str, int i, t_all *all);
 int	my_unsetenv_builtin(char **cmd, t_all *all);
 int	launch_condition(t_all *all, char *spec, int pos);
 int	check_dollar(char **str, int i, int j, t_all *all);

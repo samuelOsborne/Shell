@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 ** 
 ** Started on  Tue May 17 10:39:21 2016 Lucas Villeneuve
-** Last update Wed May 18 19:15:55 2016 Lucas Villeneuve
+** Last update Sun Jun  5 13:28:43 2016 Lucas Villeneuve
 */
 
 #include <string.h>
@@ -58,31 +58,6 @@ void	write_special_char(char str, char *string)
   my_putchar('\\');
 }
 
-int	write_dollar(char *str, int i, t_all *all)
-{
-  char	*tmp;
-  char	*var;
-  int	k;
-
-  if ((tmp = calloc(strlen(str) + 1, sizeof(char))) == NULL)
-    error_malloc();
-  k = 0;
-  if (str[i] == ' ')
-    my_putchar('$');
-  else
-    {
-      while (str[i] && str[i] != ' ' && str[i] != '\"' && str[i] != '\'')
-	tmp[k++] = str[i++];
-      tmp[k++] = '=';
-      tmp[k] = 0;
-      var = my_getenv(all->env.tab, tmp);
-      my_putstr(var);
-      free(var);
-      free(tmp);
-    }
-  return (i);
-}
-
 void	my_putstr_echo(char *str, int *d_mark, int *s_mark, t_all *all)
 {
   int	i;
@@ -109,6 +84,16 @@ void	my_putstr_echo(char *str, int *d_mark, int *s_mark, t_all *all)
     }
 }
 
+int	check_echo(char **cmd, t_all *all)
+{
+  if (check_dollar(cmd, -1, -1, all) == 1 || (check_marks(cmd, -1, -1) == 1))
+    {
+      all->status = 1;
+      return (1);
+    }
+  return (0);
+}
+
 void	my_echo(char **cmd, t_all *all)
 {
   int	i;
@@ -116,7 +101,7 @@ void	my_echo(char **cmd, t_all *all)
   int	d_mark;
   int	s_mark;
 
-  if (check_dollar(cmd, -1, -1, all) == 1 || (check_marks(cmd, -1, -1) == 1))
+  if (check_echo(cmd, all) == 1 )
     return ;
   arg = 0;
   i = 1;

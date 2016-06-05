@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 ** 
 ** Started on  Wed May 18 19:15:10 2016 Lucas Villeneuve
-** Last update Fri May 20 15:07:53 2016 Lucas Villeneuve
+** Last update Sun Jun  5 13:29:39 2016 Lucas Villeneuve
 */
 
 #include <string.h>
@@ -68,4 +68,29 @@ int	check_dollar(char **str, int i, int j, t_all *all)
 	}
     }
   return (0);
+}
+
+int	write_dollar(char *str, int i, t_all *all)
+{
+  char	*tmp;
+  char	*var;
+  int	k;
+
+  if ((tmp = calloc(strlen(str) + 1, sizeof(char))) == NULL)
+    error_malloc();
+  k = 0;
+  if (str[i] == ' ')
+    my_putchar('$');
+  else
+    {
+      while (str[i] && str[i] != ' ' && str[i] != '\"' && str[i] != '\'')
+	tmp[k++] = str[i++];
+      tmp[k++] = '=';
+      tmp[k] = 0;
+      var = my_getenv(all->env.tab, tmp);
+      my_putstr(var);
+      free(var);
+      free(tmp);
+    }
+  return (i);
 }

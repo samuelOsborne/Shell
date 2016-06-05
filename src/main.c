@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 **
 ** Started on  Wed May 11 15:59:33 2016 Lucas Villeneuve
-** Last update Sun Jun  5 14:14:31 2016 Lucas Villeneuve
+** Last update Sun Jun  5 15:07:53 2016 Samuel
 */
 
 #include <signal.h>

@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 **
 ** Started on  Sat Jun  4 19:12:16 2016 Lucas Villeneuve
-** Last update Sat Jun  4 21:23:21 2016 Arnaud Costa
+** Last update Sun Jun  5 12:03:40 2016 escorn_t
 */
 
 #include <string.h>
@@ -27,6 +27,7 @@ void		init_all(t_all *all)
   if ((all->tree = calloc(1, sizeof(t_tree))) == NULL)
     error_malloc();
   all->path = my_str_to_wordtab(my_getenv(all->env.tab, "PATH="), ':');
+  all->status = 0;
 }
 
 int		read_in_rc(t_all *all, char *s)

@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 **
 ** Started on  Wed May 11 17:30:02 2016 Lucas Villeneuve
-** Last update Fri Jun  3 15:58:30 2016 escorn_t
+** Last update Sun Jun  5 12:10:09 2016 escorn_t
 */
 
 #include <stdlib.h>
@@ -44,9 +44,6 @@ void	free_tree(t_tree *tree)
       free(tree->next[i]);
       i++;
     }
-  free(tree->next);
-  free(tree->cmd);
-  free(tree);
 }
 
 void	free_env(t_env env)

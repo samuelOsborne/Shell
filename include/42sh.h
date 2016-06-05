@@ -5,7 +5,7 @@
 ** Login   <escorn_t@epitech.net>
 **
 ** Started on  Wed May 11 13:26:46 2016 escorn_t
-** Last update Sat Jun  4 21:28:28 2016 Arnaud Costa
+** Last update Sun Jun  5 14:25:07 2016 escorn_t
 */
 
 #ifndef _42SH_H_
@@ -117,6 +117,7 @@ int	my_setenv_builtin(char **cmd, t_all *all);
 int	my_unsetenv_builtin(char **cmd, t_all *all);
 int	launch_condition(t_all *all, char *spec, int pos);
 int	check_dollar(char **str, int i, int j, t_all *all);
+int	parse_for_errors(char *s);
 char	*get_alias(char *s);
 char	*epurstr(char *str);
 char	*get_next_line(int fd);

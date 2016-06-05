@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 **
 ** Started on  Wed May 11 15:59:33 2016 Lucas Villeneuve
-** Last update Sat Jun  4 19:17:04 2016 Lucas Villeneuve
+** Last update Sun Jun  5 14:24:29 2016 escorn_t
 */
 
 #include <signal.h>
@@ -13,32 +13,40 @@
 #include <unistd.h>
 #include "42sh.h"
 
-void		main_loop(t_all *all)
+void		exec_process(t_all *all)
 {
   int		i;
   int		j;
 
+  create_tree(all->tree);
+  i = 0;
+  while (all->tree->next[i] != NULL)
+    {
+      j = 0;
+      while (all->tree->next[i]->next[j] != NULL)
+	{
+	  if (launch_condition(all, all->tree->next[i]->spec, j) == 0)
+	    launch_exec(all->tree->next[i]->next[j], all);
+	  j++;
+	}
+      i++;
+    }
+  free_tree(all->tree);
+}
+
+void		main_loop(t_all *all)
+{
   while (42)
     {
       init_all(all);
       if ((all->tree->cmd = epurstr(get_next_line(0))) == NULL)
 	return ;
-      all->status = 0;
-      create_tree(all->tree);
-      i = 0;
-      while (all->tree->next[i] != NULL)
-	{
-	  j = 0;
-	  while (all->tree->next[i]->next[j] != NULL)
-	    {
-	      if (launch_condition(all, all->tree->next[i]->spec, j) == 0)
-                launch_exec(all->tree->next[i]->next[j], all);
-	      j++;
-	    }
-	  i++;
-	}
+      if (parse_for_errors(all->tree->cmd) != -1)
+	exec_process(all);
       free_path(all->path);
-      free_tree(all->tree);
+      free(all->tree->next);
+      free(all->tree->cmd);
+      free(all->tree);
     }
 }
 

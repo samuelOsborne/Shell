@@ -5,64 +5,75 @@
 ## Login   <villen_l@epitech.net>
 ##
 ## Started on  Wed May 11 16:00:21 2016 Lucas Villeneuve
-## Last update Sun Jun  5 14:32:39 2016 escorn_t
+## Last update Sun Jun  5 14:57:10 2016 Arnaud Costa
 ##
 
 NAME	=	42sh
 
-SRC	=	src/main.c			\
-		src/get_next_line.c		\
-		src/my_str_to_wordtab.c		\
-		src/my_str_to_wordpipe.c	\
-		src/my_print.c			\
-		src/error.c			\
-		src/my_free.c			\
-		src/epurstr.c			\
-		src/my_env.c			\
-		src/create_tree.c		\
-		src/my_exec.c			\
-		src/my_getenv.c			\
-		src/find_type_cmd.c		\
-		src/builtins.c			\
-		src/my_exit.c			\
-		src/my_getnbr.c			\
-		src/manage_tab_env.c		\
-		src/my_echo.c			\
-		src/my_echo_dollar.c		\
-		src/my_cd.c			\
-		src/my_pipe.c			\
-		src/create_cmd_pipe.c		\
-		src/exec_pipe.c			\
-		src/manage_pipe.c		\
-		src/check_pipe.c		\
-		src/count_wordpipe.c		\
-		src/loop_pipe.c			\
-		src/command_not_found.c		\
-		src/get_spec.c			\
-		src/exec_tree.c			\
-		src/alias_list.c		\
-		src/init_rc.c			\
-		src/merge_alias.c		\
-		src/globbing.c			\
-		src/prompt.c			\
-		src/preparsing.c		\
-		src/alphanum.c
+SRC	=	main.c			\
+		get_next_line.c		\
+		my_str_to_wordtab.c	\
+		my_str_to_wordpipe.c	\
+		my_print.c		\
+		error.c			\
+		my_free.c		\
+		epurstr.c		\
+		my_env.c		\
+		create_tree.c		\
+		my_exec.c		\
+		my_getenv.c		\
+		find_type_cmd.c		\
+		builtins.c		\
+		my_exit.c		\
+		my_getnbr.c		\
+		manage_tab_env.c	\
+		my_echo.c		\
+		my_echo_dollar.c	\
+		my_cd.c			\
+		my_pipe.c		\
+		create_cmd_pipe.c	\
+		exec_pipe.c		\
+		manage_pipe.c		\
+		check_pipe.c		\
+		count_wordpipe.c	\
+		loop_pipe.c		\
+		command_not_found.c	\
+		get_spec.c		\
+		exec_tree.c		\
+		alias_list.c		\
+		init_rc.c		\
+		merge_alias.c		\
+		globbing.c		\
+		prompt.c		\
+		preparsing.c		\
+		alphanum.c
 
-OBJ	=	$(SRC:.c=.o)
+OBJ	=	$(addprefix $(OBJDIR), $(SRC:.c=.o))
+
+OBJDIR	=	obj/
+
+SRCDIR =        src/
 
 CC	=	gcc
 
 RM	=	rm -rf
+
+MK	=	mkdir
 
 CFLAGS	=	-I include -W -Wall -Wextra
 
 $(NAME):$(OBJ)
 	$(CC) -o $(NAME) $(OBJ)
 
+$(OBJDIR)%.o:   $(SRCDIR)%.c
+		$(MK) -p $(OBJDIR)
+		$(CC) $(CFLAGS) -c $< -o $@
+
 all:	$(NAME)
 
 clean:
 	$(RM) $(OBJ)
+	$(RM) -r $(OBJDIR)
 
 fclean:	clean
 	$(RM) $(NAME)

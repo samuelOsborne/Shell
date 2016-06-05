@@ -5,7 +5,7 @@
 ## Login   <villen_l@epitech.net>
 ##
 ## Started on  Wed May 11 16:00:21 2016 Lucas Villeneuve
-## Last update Sat Jun  4 19:15:47 2016 Lucas Villeneuve
+## Last update Sun Jun  5 11:19:34 2016 Lucas Villeneuve
 ##
 
 NAME	=	42sh
@@ -44,7 +44,8 @@ SRC	=	src/main.c			\
 		src/init_rc.c			\
 		src/merge_alias.c		\
 		src/globbing.c			\
-		src/prompt.c
+		src/prompt.c			\
+		src/alphanum.c
 
 OBJ	=	$(SRC:.c=.o)
 

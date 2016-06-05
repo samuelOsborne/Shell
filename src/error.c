@@ -5,9 +5,11 @@
 ** Login   <villen_l@epitech.net>
 ** 
 ** Started on  Wed May 11 17:00:47 2016 Lucas Villeneuve
-** Last update Sat Jun  4 19:50:36 2016 Lucas Villeneuve
+** Last update Sun Jun  5 13:02:23 2016 Lucas Villeneuve
 */
 
+#include <errno.h>
+#include <unistd.h>
 #include <signal.h>
 #include <stdlib.h>
 #include "42sh.h"

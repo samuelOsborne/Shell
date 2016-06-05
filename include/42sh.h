@@ -5,7 +5,7 @@
 ** Login   <escorn_t@epitech.net>
 **
 ** Started on  Wed May 11 13:26:46 2016 escorn_t
-** Last update Sat Jun  4 21:28:28 2016 Arnaud Costa
+** Last update Sun Jun  5 12:52:24 2016 Lucas Villeneuve
 */
 
 #ifndef _42SH_H_
@@ -85,11 +85,11 @@ void	my_cd(t_all *all, char **cmd);
 void	my_pipe(char **tab, t_all *all);
 void	my_echo(char **cmd, t_all *all);
 void	get_spec(t_tree *tree, int cmpt);
-void	my_setenv(char **cmd, t_env *env);
-void	my_unsetenv(char **cmd, t_env *env);
 void	my_simple_exit(char **cmd, t_all *all);
 void	put_alias_in_list(t_all *all, t_alias *new);
 void	manage_end_pipe(int end, t_pipe *cmd, int j);
+void	my_setenv(char **cmd, t_env *env, t_all *all);
+void	my_unsetenv(char **cmd, t_env *env, t_all *all);
 void	my_loop_pipe(char **tab, t_all *all, t_pipe *cmd);
 void	my_advanced_exit(char **cmd, t_all *all, int ret);
 void	my_simple_exec(t_all *all, char **cmd, char **path, t_env *env);
@@ -97,6 +97,7 @@ void	my_exec_pipe(char **cmd, char **path, t_env *env, t_all *all);
 void	manage_start_pipe(t_fd *st_end, t_pipe *cmd, int j, t_all *all);
 int	is_dir(char *cmd);
 int	error_pipe(char c);
+int	alphanum(char *str);
 int	init_rc(t_all *all);
 int	my_getnbr(char *str);
 int	check_pipe(char *str);

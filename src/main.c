@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 **
 ** Started on  Wed May 11 15:59:33 2016 Lucas Villeneuve
-** Last update Sun Jun  5 14:33:14 2016 escorn_t
+** Last update Sun Jun  5 14:14:31 2016 Lucas Villeneuve
 */
 
 #include <signal.h>
@@ -41,6 +41,7 @@ void		main_loop(t_all *all)
       init_all(all);
       if ((all->tree->cmd = epurstr(get_next_line(0))) == NULL)
 	return ;
+      all->status = 0;
       if (parse_for_errors(all->tree->cmd) != -1)
 	exec_process(all);
       free_path(all->path);

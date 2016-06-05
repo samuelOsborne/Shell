@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 ** 
 ** Started on  Mon May 30 15:37:06 2016 Lucas Villeneuve
-** Last update Sun Jun  5 13:17:03 2016 Lucas Villeneuve
+** Last update Sun Jun  5 14:13:18 2016 Lucas Villeneuve
 */
 
 #include <string.h>
@@ -67,6 +67,7 @@ void		my_loop_pipe(char **tab, t_all *all, t_pipe *cmd)
   int		fd[2];
   int		i;
   int		j;
+  int		ret;
   t_fd		st_end;
 
   nb_pipe = count_nb_pipe(tab);
@@ -79,8 +80,9 @@ void		my_loop_pipe(char **tab, t_all *all, t_pipe *cmd)
       if (pipe(fd) < 0)
 	exit(1);
       st_end.end = fd[1];
-      if (fork_exec_pipe(&st_end, cmd, j, all) == 1)
-	error_command_pipe(cmd[j].tab[0]);
+      ret = fork_exec_pipe(&st_end, cmd, j, all);
+      if (ret == 1 || ret == 3)
+	error_command_pipe(cmd[j].tab[0], ret);
       close(fd[1]);
       st_end.start = fd[0];
       j += 2;

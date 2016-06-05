@@ -5,7 +5,7 @@
 ## Login   <villen_l@epitech.net>
 ##
 ## Started on  Wed May 11 16:00:21 2016 Lucas Villeneuve
-## Last update Sun Jun  5 14:57:10 2016 Arnaud Costa
+## Last update Sun Jun  5 14:59:55 2016 Lucas Villeneuve
 ##
 
 NAME	=	42sh
@@ -62,22 +62,22 @@ MK	=	mkdir
 
 CFLAGS	=	-I include -W -Wall -Wextra
 
-$(NAME):$(OBJ)
-	$(CC) -o $(NAME) $(OBJ)
+$(NAME):	$(OBJ)
+		$(CC) -o $(NAME) $(OBJ)
 
 $(OBJDIR)%.o:   $(SRCDIR)%.c
-		$(MK) -p $(OBJDIR)
+		@$(MK) -p $(OBJDIR)
 		$(CC) $(CFLAGS) -c $< -o $@
 
-all:	$(NAME)
+all:		$(NAME)
 
 clean:
-	$(RM) $(OBJ)
-	$(RM) -r $(OBJDIR)
+		$(RM) $(OBJ)
+		$(RM) -r $(OBJDIR)
 
-fclean:	clean
-	$(RM) $(NAME)
+fclean:		clean
+		$(RM) $(NAME)
 
-re:	fclean all
+re:		fclean all
 
-.PHONY:	all clean fclean re
+.PHONY:		all clean fclean re

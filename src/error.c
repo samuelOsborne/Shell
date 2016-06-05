@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 ** 
 ** Started on  Wed May 11 17:00:47 2016 Lucas Villeneuve
-** Last update Sun Jun  5 13:15:12 2016 Lucas Villeneuve
+** Last update Sun Jun  5 14:14:11 2016 Lucas Villeneuve
 */
 
 #include <unistd.h>
@@ -27,10 +27,13 @@ int	error_pipe(char c)
   return (2);
 }
 
-void	error_command_pipe(char *str)
+void	error_command_pipe(char *str, int ret)
 {
-  my_put_err(str);
-  my_put_err(": Command not found.\n");
+  if (ret == 1)
+    {
+      my_put_err(str);
+      my_put_err(": Command not found.\n");
+    }
   exit(1);
 }
 

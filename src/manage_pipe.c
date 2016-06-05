@@ -5,7 +5,7 @@
 ** Login   <villen_l@epitech.net>
 ** 
 ** Started on  Mon May 30 16:39:33 2016 Lucas Villeneuve
-** Last update Wed Jun  1 10:24:32 2016 Lucas Villeneuve
+** Last update Sun Jun  5 14:13:19 2016 Lucas Villeneuve
 */
 
 #include <stdlib.h>
@@ -30,12 +30,22 @@ void	manage_start_right(t_fd *st_end, t_pipe *cmd, t_all *all)
 	{
 	  if ((st_end->end = open(cmd[1].tab[0],
 			  O_WRONLY | O_CREAT | O_TRUNC, 0664)) == -1)
-	    exit(1);
+	    {
+	      my_put_err(cmd[1].tab[0]);
+	      my_put_err(": No such file or directory.\n");
+	      exit(3);
+	    }
 	}
       else if (strcmp(cmd[0].tab[0], ">>") == 0)
-	if ((st_end->end = open(cmd[1].tab[0],
-			O_WRONLY | O_CREAT | O_APPEND, 0664)) == -1)
-	  exit(1);
+	{
+	  if ((st_end->end = open(cmd[1].tab[0],
+				  O_WRONLY | O_CREAT | O_APPEND, 0664)) == -1)
+	    {
+	      my_put_err(cmd[1].tab[0]);
+	      my_put_err(": No such file or directory.\n");
+	      exit(3);
+	    }
+	}
       dup_and_close(st_end->end, 1);
       my_exec_pipe(cmd[2].tab, all->path, &all->env, all);
     }
@@ -47,8 +57,9 @@ void	manage_start_start(t_fd *st_end, t_pipe *cmd, int j)
     {
       if ((st_end->start = open(cmd[j + 1].tab[0], O_RDONLY)) == -1)
 	{
-	  my_put_err("Can't open the file\n");
-	  exit(1);
+	  my_put_err(cmd[j + 1].tab[0]);
+	  my_put_err(": No such file or directory.\n");
+	  exit(3);
 	}
       dup_and_close(st_end->start, 0);
       st_end->mode = 1;
@@ -57,8 +68,9 @@ void	manage_start_start(t_fd *st_end, t_pipe *cmd, int j)
     {
       if ((st_end->start = open(cmd[j + 2].tab[0], O_RDONLY)) == -1)
 	{
-	  my_put_err("Can't open the file\n");
-	  exit(1);
+	  my_put_err(cmd[j + 2].tab[0]);
+	  my_put_err(": No such file or directory.\n");
+	  exit(3);
 	}
       dup_and_close(st_end->start, 0);
     }
@@ -90,12 +102,20 @@ void	manage_end_pipe(int end, t_pipe *cmd, int j)
 	{
 	  if ((end = open(cmd[j + 2].tab[0],
 			  O_WRONLY | O_CREAT | O_TRUNC, 0664)) == -1)
-	    exit(1);
+	    {
+	      my_put_err(cmd[j + 2].tab[0]);
+	      my_put_err(": No such file or directory.\n");
+	      exit(3);
+	    }
 	}
       else if (strcmp(cmd[j + 1].tab[0], ">>") == 0)
 	if ((end = open(cmd[j + 2].tab[0],
 			O_WRONLY | O_CREAT | O_APPEND, 0664)) == -1)
-	  exit(1);
+	  {
+	    my_put_err(cmd[j + 2].tab[0]);
+	    my_put_err(": No such file or directory.\n");
+	    exit(3);
+	  }
       dup2(end, 1);
       close(end);
     }
